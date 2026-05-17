@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Register for Telangana Tourism Blog to start sharing your travel experiences.">
+  <title>Register - Telangana Tourism Blog</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+
+<body>
+
+  <div class="auth-wrapper">
+    <div class="auth-card fade-in-up">
+      <div class="text-center mb-3">
+        <a href="index.html" style="text-decoration:none;">
+          <h1 style="font-family:var(--font-heading);color:var(--primary);font-size:1.8rem;">Telangana<span
+              style="color:var(--accent)">Blog</span></h1>
+        </a>
+      </div>
+      <h2 class="text-center">Create Account</h2>
+      <p class="text-center">Join the Telangana travel community</p>
+
+      <form id="registerForm" onsubmit="handleRegister(event)">
+        <div class="mb-3">
+          <label class="form-label" for="regName">Full Name</label>
+          <input type="text" class="form-control" id="regName" placeholder="Enter your name" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="regEmail">Email Address</label>
+          <input type="email" class="form-control" id="regEmail" placeholder="you@example.com" required>
+        </div>
+        <div class="mb-4">
+          <label class="form-label" for="regPassword">Password</label>
+          <input type="password" class="form-control" id="regPassword" placeholder="Min 6 characters" required
+            minlength="6">
+        </div>
+        <button type="submit" class="btn-primary-custom w-100" id="registerBtn">
+          <i class="bi bi-person-plus me-2"></i>Create Account
+        </button>
+      </form>
+
+      <!-- Google Sign-Up Divider -->
+      <div style="display:flex;align-items:center;margin:1.2rem 0 1rem;">
+        <div style="flex:1;height:1px;background:rgba(255,255,255,0.12);"></div>
+        <span style="padding:0 0.8rem;color:var(--text-secondary);font-size:0.85rem;">or</span>
+        <div style="flex:1;height:1px;background:rgba(255,255,255,0.12);"></div>
+      </div>
+
+      <!-- Google Sign-Up Button -->
+      <div id="g_id_onload" data-client_id="819381580261-7cqrvvnthbo045e86ncd3aolft6glol6.apps.googleusercontent.com"
+        data-callback="handleGoogleResponse" data-auto_prompt="false">
+      </div>
+      <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="filled_black"
+        data-text="signup_with" data-size="large" data-logo_alignment="left" data-width="100%">
+      </div>
+
+      <p class="text-center mt-3" style="color:var(--text-secondary);font-size:0.9rem;">
+        Already have an account? <a href="login.html"
+          style="color:var(--primary);text-decoration:none;font-weight:600;">Sign in</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+  <script>
+    async function handleRegister(e) {
+      e.preventDefault();
+      const btn = document.getElementById('registerBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="custom-spinner" style="width:20px;height:20px;display:inline-block;"></span> Creating...';
+
+      const name = document.getElementById('regName').value;
+      const email = document.getElementById('regEmail').value;
+      const password = document.getElementById('regPassword').value;
+
+      try {
+        const res = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password })
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          showToast(data.message || 'Registration failed', 'error');
+          btn.disabled = false;
+          btn.innerHTML = '<i class="bi bi-person-plus me-2"></i>Create Account';
+          return;
+        }
+
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify({ _id: data._id, name: data.name, email: data.email, role: data.role }));
+        showToast('Account created! Redirecting...', 'success');
+        setTimeout(() => window.location.href = 'index.html', 1000);
+      } catch (err) {
+        showToast('Server error. Please try again.', 'error');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="bi bi-person-plus me-2"></i>Create Account';
+      }
+    }
+
+    // Google Sign-Up callback
+    async function handleGoogleResponse(response) {
+      try {
+        const res = await fetch('/api/auth/google', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ credential: response.credential })
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          showToast(data.message || 'Google sign-up failed', 'error');
+          return;
+        }
+
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify({ _id: data._id, name: data.name, email: data.email, role: data.role }));
+        showToast('Account created with Google! Redirecting...', 'success');
+        setTimeout(() => window.location.href = 'index.html', 1000);
+      } catch (err) {
+        showToast('Server error. Please try again.', 'error');
+      }
+    }
+  </script>
+</body>
+
+</html>

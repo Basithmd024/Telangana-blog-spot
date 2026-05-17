@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Login to your Telangana Tourism Blog account to write blogs and comment.">
+  <title>Login - Telangana Tourism Blog</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+
+<body>
+
+  <div class="auth-wrapper">
+    <div class="auth-card fade-in-up">
+      <div class="text-center mb-3">
+        <a href="index.html" style="text-decoration:none;">
+          <h1 style="font-family:var(--font-heading);color:var(--primary);font-size:1.8rem;">Telangana<span
+              style="color:var(--accent)">Blog</span></h1>
+        </a>
+      </div>
+      <h2 class="text-center">Welcome Back</h2>
+      <p class="text-center">Sign in to your account</p>
+
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="mb-3">
+          <label class="form-label" for="loginEmail">Email Address</label>
+          <input type="email" class="form-control" id="loginEmail" placeholder="you@example.com" required>
+        </div>
+        <div class="mb-4">
+          <label class="form-label" for="loginPassword">Password</label>
+          <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password" required>
+        </div>
+        <button type="submit" class="btn-primary-custom w-100" id="loginBtn">
+          <i class="bi bi-box-arrow-in-right me-2"></i>Sign In
+        </button>
+      </form>
+
+      <!-- Google Sign-In Divider -->
+      <div style="display:flex;align-items:center;margin:1.2rem 0 1rem;">
+        <div style="flex:1;height:1px;background:rgba(255,255,255,0.12);"></div>
+        <span style="padding:0 0.8rem;color:var(--text-secondary);font-size:0.85rem;">or</span>
+        <div style="flex:1;height:1px;background:rgba(255,255,255,0.12);"></div>
+      </div>
+
+      <!-- Google Sign-In Button -->
+      <div id="g_id_onload" data-client_id="819381580261-7cqrvvnthbo045e86ncd3aolft6glol6.apps.googleusercontent.com"
+        data-callback="handleGoogleResponse" data-auto_prompt="false">
+      </div>
+      <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="filled_black"
+        data-text="signin_with" data-size="large" data-logo_alignment="left" data-width="100%">
+      </div>
+
+      <p class="text-center mt-3" style="color:var(--text-secondary);font-size:0.9rem;">
+        Don't have an account? <a href="register.html"
+          style="color:var(--primary);text-decoration:none;font-weight:600;">Create one</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+  <script>
+    async function handleLogin(e) {
+      e.preventDefault();
+      const btn = document.getElementById('loginBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="custom-spinner" style="width:20px;height:20px;display:inline-block;"></span> Signing in...';
+
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          showToast(data.message || 'Login failed', 'error');
+          btn.disabled = false;
+          btn.innerHTML = '<i class="bi bi-box-arrow-in-right me-2"></i>Sign In';
+          return;
+        }
+
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify({ _id: data._id, name: data.name, email: data.email, role: data.role }));
+        showToast('Login successful! Redirecting...', 'success');
+        setTimeout(() => window.location.href = 'index.html', 1000);
+      } catch (err) {
+        showToast('Server error. Please try again.', 'error');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="bi bi-box-arrow-in-right me-2"></i>Sign In';
+      }
+    }
+
+    // Google Sign-In callback
+    async function handleGoogleResponse(response) {
+      try {
+        const res = await fetch('/api/auth/google', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ credential: response.credential })
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          showToast(data.message || 'Google sign-in failed', 'error');
+          return;
+        }
+
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify({ _id: data._id, name: data.name, email: data.email, role: data.role }));
+        showToast('Google sign-in successful! Redirecting...', 'success');
+        setTimeout(() => window.location.href = 'index.html', 1000);
+      } catch (err) {
+        showToast('Server error. Please try again.', 'error');
+      }
+    }
+  </script>
+</body>
+
+</html>
