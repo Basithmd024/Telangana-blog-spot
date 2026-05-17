@@ -41,16 +41,24 @@
   <section class="blogs-wrapper">
     <div class="container">
       <h2 class="section-title">All <span class="highlight">Blog Posts</span></h2>
-      <p class="section-subtitle">Explore Telangana by category</p>
+      <p class="section-subtitle">From Charminar to Ramappa — explore Telangana by category</p>
+
+      <div class="blog-toolbar">
+        <div class="search-box">
+          <i class="bi bi-search"></i>
+          <input type="search" class="form-control" id="blogSearch" placeholder="Search blogs, categories, or authors" aria-label="Search blogs" oninput="searchBlogs(this.value)">
+        </div>
+        <div class="search-summary" id="searchSummary">Showing all blogs</div>
+      </div>
 
       <!-- Category Filters -->
       <div class="category-filters" id="categoryFilters">
-        <button class="category-pill active" onclick="filterBlogs('All')">All</button>
-        <button class="category-pill" onclick="filterBlogs('Historical')"><i class="bi bi-bank me-1"></i>Historical</button>
-        <button class="category-pill" onclick="filterBlogs('Temples')"><i class="bi bi-building me-1"></i>Temples</button>
-        <button class="category-pill" onclick="filterBlogs('Waterfalls')"><i class="bi bi-water me-1"></i>Waterfalls</button>
-        <button class="category-pill" onclick="filterBlogs('Culture & Festivals')"><i class="bi bi-music-note-beamed me-1"></i>Culture & Festivals</button>
-        <button class="category-pill" onclick="filterBlogs('Food Places')"><i class="bi bi-cup-hot me-1"></i>Food Places</button>
+        <button class="category-pill active" onclick="filterBlogs('All', this)">All</button>
+        <button class="category-pill" onclick="filterBlogs('Historical', this)"><i class="bi bi-bank me-1"></i>Historical</button>
+        <button class="category-pill" onclick="filterBlogs('Temples', this)"><i class="bi bi-building me-1"></i>Temples</button>
+        <button class="category-pill" onclick="filterBlogs('Waterfalls', this)"><i class="bi bi-water me-1"></i>Waterfalls</button>
+        <button class="category-pill" onclick="filterBlogs('Culture & Festivals', this)"><i class="bi bi-music-note-beamed me-1"></i>Culture & Festivals</button>
+        <button class="category-pill" onclick="filterBlogs('Food Places', this)"><i class="bi bi-cup-hot me-1"></i>Food Places</button>
       </div>
 
       <!-- Blogs Grid -->
@@ -80,9 +88,29 @@
 
   <!-- Footer -->
   <footer class="site-footer">
-    <div class="container">
-      <div class="footer-brand">Telangana<span style="color:var(--accent)">Blog</span></div>
-      <p>&copy; 2026 Telangana Tourism Blog. Built with <i class="bi bi-heart-fill" style="color:var(--primary);"></i> for Telangana.</p>
+    <div class="footer-panel container">
+      <div class="footer-brand">Telangana<span style="color:var(--terracotta-light)">Blog</span></div>
+      <p class="footer-quote">A living guide to Telangana's heritage, food, festivals, and places that deserve the spotlight.</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="blogs.html">Blogs</a>
+        <a href="register.html">Write a Story</a>
+        <a href="login.html">Login</a>
+      </div>
+      <div class="footer-social" aria-label="Social links">
+        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        <a href="#" aria-label="X"><i class="bi bi-twitter-x"></i></a>
+      </div>
+      <p class="footer-tagline">జై తెలంగాణ — Celebrating our roots</p>
+      <div class="footer-icons">
+        <span><i class="bi bi-flower1"></i> Bathukamma</span>
+        <span><i class="bi bi-music-note-beamed"></i> Bonalu</span>
+        <span><i class="bi bi-grid-3x3-gap"></i> Pochampally</span>
+        <span><i class="bi bi-cup-hot"></i> Telangana Cuisine</span>
+      </div>
+      <p>&copy; 2026 Telangana Tourism Blog. Built with <i class="bi bi-heart-fill" style="color:var(--gold);"></i> for Telangana.</p>
     </div>
   </footer>
 
@@ -92,6 +120,8 @@
   <script src="app.js"></script>
   <script>
     let allBlogs = [];
+    let activeCategory = 'All';
+    let searchQuery = '';
 
     document.addEventListener('DOMContentLoaded', () => {
       updateNav();
@@ -100,31 +130,59 @@
 
     async function loadAllBlogs() {
       try {
+        const container = document.getElementById('blogsContainer');
+        container.innerHTML = createBlogSkeletonCards(6);
         const res = await fetch('/api/blogs');
         allBlogs = await res.json();
-        renderBlogs(allBlogs);
+        applyFilters();
       } catch (err) {
         console.error(err);
       }
     }
 
-    function filterBlogs(category) {
+    function filterBlogs(category, button) {
+      activeCategory = category;
       // Update pills
       document.querySelectorAll('.category-pill').forEach(pill => pill.classList.remove('active'));
-      event.target.closest('.category-pill').classList.add('active');
+      if (button) button.classList.add('active');
 
-      if (category === 'All') {
-        renderBlogs(allBlogs);
-      } else {
-        const filtered = allBlogs.filter(b => b.category === category);
-        renderBlogs(filtered);
+      applyFilters();
+    }
+
+    function searchBlogs(value) {
+      searchQuery = value.trim().toLowerCase();
+      applyFilters();
+    }
+
+    function applyFilters() {
+      let filtered = allBlogs;
+
+      if (activeCategory !== 'All') {
+        filtered = filtered.filter(b => b.category === activeCategory);
+      }
+
+      if (searchQuery) {
+        filtered = filtered.filter(b => {
+          const haystack = [b.title, b.category, b.description, b.author?.name].join(' ').toLowerCase();
+          return haystack.includes(searchQuery);
+        });
+      }
+
+      renderBlogs(filtered);
+
+      const summary = document.getElementById('searchSummary');
+      if (summary) {
+        const categoryText = activeCategory === 'All' ? 'all categories' : activeCategory;
+        summary.textContent = searchQuery
+          ? `Showing ${filtered.length} result${filtered.length === 1 ? '' : 's'} for "${searchQuery}" in ${categoryText}`
+          : `Showing ${filtered.length} blog${filtered.length === 1 ? '' : 's'} in ${categoryText}`;
       }
     }
 
     function renderBlogs(blogs) {
       const container = document.getElementById('blogsContainer');
       if (blogs.length === 0) {
-        container.innerHTML = '<div class="no-results"><i class="bi bi-journal-x"></i><p>No blogs found in this category.</p></div>';
+        container.innerHTML = '<div class="no-results"><i class="bi bi-journal-x"></i><p>No blogs found. Try a different search or category.</p></div>';
         return;
       }
       container.innerHTML = blogs.map((blog, i) => createBlogCard(blog, i)).join('');
@@ -136,7 +194,7 @@
 
       document.getElementById('modalTitle').textContent = blog.title;
 
-      const imgSrc = blog.image ? blog.image : 'https://placehold.co/800x400/1c2333/e85d04?text=' + encodeURIComponent(blog.category);
+      const imgSrc = blog.image ? blog.image : 'https://placehold.co/800x400/2a1520/d4a84b?text=' + encodeURIComponent(blog.category);
 
       let html = `
         <img src="${imgSrc}" class="img-fluid rounded mb-3" style="width:100%;max-height:400px;object-fit:cover;" alt="${blog.title}">

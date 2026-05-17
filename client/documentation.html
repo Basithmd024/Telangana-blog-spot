@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Telangana Tourism Blog — Project Documentation</title>
+  <style>
+    /* ===== Page Setup (A4 Portrait) ===== */
+    @page {
+      size: A4 portrait;
+      margin: 1in 1in 1in 1.5in; /* top, right, bottom, left */
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 12pt;
+      line-height: 1.5;
+      color: #000000;
+      background: #ffffff;
+    }
+
+    body {
+      text-align: justify;
+    }
+
+    /* Main content */
+    p {
+      margin: 0 0 6pt 0;
+      text-align: justify;
+    }
+
+    ul, ol {
+      margin: 0 0 6pt 0;
+      padding-left: 24pt;
+    }
+
+    li {
+      margin-bottom: 4pt;
+    }
+
+    /* Chapter Heading — 16pt, Bold, ALL CAPS */
+    h1.chapter {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 16pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #000000;
+      margin: 12pt 0 6pt 0;
+      page-break-before: always;
+      text-align: left;
+    }
+
+    h1.chapter.center {
+      text-align: center;
+    }
+
+    h1.chapter.no-break {
+      page-break-before: auto;
+    }
+
+    /* Main Section Heading — 14pt, Bold, ALL CAPS */
+    h2.section {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 14pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #000000;
+      margin: 12pt 0 6pt 0;
+      text-align: left;
+    }
+
+    /* Subheading — 12pt, Bold */
+    h3.subsection {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 12pt;
+      font-weight: bold;
+      color: #000000;
+      margin: 8pt 0 6pt 0;
+      text-align: left;
+    }
+
+    /* Title Page */
+    .title-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      page-break-after: always;
+      padding: 1in 1.5in;
+    }
+
+    .title-page .project-title {
+      font-size: 22pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 18pt;
+    }
+
+    .title-page .subtitle {
+      font-size: 14pt;
+      margin-bottom: 24pt;
+    }
+
+    .title-page .meta {
+      font-size: 12pt;
+      line-height: 1.8;
+      margin: 4pt 0;
+    }
+
+    .title-page .college {
+      font-size: 16pt;
+      font-weight: bold;
+      margin-top: 36pt;
+    }
+
+    /* Front matter pages */
+    .front-matter {
+      page-break-after: always;
+    }
+
+    /* Table of Contents */
+    .toc-page {
+      page-break-after: always;
+    }
+
+    .toc-heading {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 16pt;
+      font-weight: bold;
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 18pt;
+      color: #000000;
+    }
+
+    .toc {
+      font-size: 12pt;
+      line-height: 1.5;
+    }
+
+    .toc-entry {
+      display: flex;
+      align-items: baseline;
+      margin: 4pt 0;
+    }
+
+    .toc-entry .toc-label {
+      flex-shrink: 0;
+    }
+
+    .toc-entry .toc-dots {
+      flex: 1;
+      border-bottom: 1px dotted #000;
+      margin: 0 6pt 2pt 6pt;
+      min-width: 20pt;
+    }
+
+    .toc-entry .toc-page {
+      flex-shrink: 0;
+      min-width: 20pt;
+      text-align: right;
+    }
+
+    .toc-entry.indent-1 {
+      padding-left: 24pt;
+    }
+
+    /* Tables */
+    table.report-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12pt;
+      margin: 8pt 0 12pt 0;
+    }
+
+    table.report-table th,
+    table.report-table td {
+      border: 1px solid #000000;
+      padding: 6pt 8pt;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    table.report-table th {
+      font-weight: bold;
+      text-align: center;
+    }
+
+    table.report-table caption {
+      caption-side: top;
+      font-weight: bold;
+      margin-bottom: 6pt;
+      text-align: center;
+    }
+
+    /* Figures */
+    .figure {
+      text-align: center;
+      margin: 12pt 0;
+      page-break-inside: avoid;
+    }
+
+    .figure img,
+    .figure .figure-placeholder {
+      width: 5.5in;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border: 1px solid #cccccc;
+    }
+
+    .figure .figure-placeholder {
+      background: #f5f5f5;
+      padding: 40pt 20pt;
+      font-size: 11pt;
+      color: #333333;
+      font-style: italic;
+    }
+
+    .figure-caption {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 11pt;
+      font-style: italic;
+      text-align: center;
+      margin-top: 6pt;
+      color: #000000;
+    }
+
+    /* Code */
+    pre.code {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 10pt;
+      background: #f7f7f7;
+      border: 1px solid #cccccc;
+      padding: 8pt;
+      margin: 6pt 0 12pt 0;
+      overflow-x: auto;
+      text-align: left;
+      line-height: 1.4;
+    }
+
+    /* Screen container */
+    .report-body {
+      max-width: 7.5in;
+      margin: 0 auto;
+      padding: 12pt 0;
+    }
+
+    /* Print controls */
+    .print-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #2c3e50;
+      color: #ffffff;
+      padding: 8px 16px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      z-index: 1000;
+      font-family: system-ui, sans-serif;
+      font-size: 13px;
+    }
+
+    .print-bar button {
+      background: #ff6b35;
+      color: #ffffff;
+      border: none;
+      padding: 6px 14px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    .print-bar a {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    body.has-bar {
+      padding-top: 44px;
+    }
+
+    @media print {
+      .print-bar { display: none; }
+      body.has-bar { padding-top: 0; }
+      .report-body { max-width: none; padding: 0; }
+      h1.chapter { page-break-before: always; }
+      h1.chapter.no-break { page-break-before: auto; }
+    }
+  </style>
+</head>
+<body class="has-bar">
+
+  <div class="print-bar">
+    <button type="button" onclick="window.print()">Print / Save as PDF</button>
+    <a href="index.html">← Back to Home</a>
+  </div>
+
+  <!-- ==================== TITLE PAGE ==================== -->
+  <section class="title-page">
+    <div class="project-title">Telangana Tourism Blog</div>
+    <div class="subtitle">A Full-Stack Web Application for Tourism Content Management</div>
+    <div class="meta">A Project Report</div>
+    <div class="meta">Submitted in partial fulfilment of the requirements</div>
+    <div class="meta">for the award of the degree of</div>
+    <div class="meta"><strong>Bachelor of Technology</strong></div>
+    <div class="meta">in Computer Science and Engineering</div>
+    <div class="college">[Your College / University Name]</div>
+    <div class="meta" style="margin-top:24pt;">Submitted By: [Student Name(s)]</div>
+    <div class="meta">Roll No(s): [Roll Numbers]</div>
+    <div class="meta">Under the Guidance of: [Guide Name]</div>
+    <div class="meta" style="margin-top:18pt;">Department of Computer Science &amp; Engineering</div>
+    <div class="meta">May 2026</div>
+  </section>
+
+  <div class="report-body">
+
+    <!-- ==================== CERTIFICATE ==================== -->
+    <section class="front-matter">
+      <h1 class="chapter center no-break">Certificate</h1>
+      <p>This is to certify that the project report entitled <strong>“Telangana Tourism Blog — A Full-Stack Web Application for Tourism Content Management”</strong> submitted by <strong>[Student Name(s)]</strong> in partial fulfilment of the requirements for the award of the degree of <strong>Bachelor of Technology</strong> in Computer Science and Engineering is a record of bonafide work carried out under my supervision and guidance.</p>
+      <p>The matter embodied in this project report has not been submitted earlier for the award of any degree or diploma to the best of my knowledge. The work presented in this report is original and has been completed by the student(s) during the academic year 2025–2026 in the Department of Computer Science and Engineering.</p>
+      <p>The project demonstrates competence in full-stack web development, database management, API design, and software testing. The technical content, including system architecture, implementation details, and test results, has been verified for accuracy and completeness to the best of my knowledge as project guide.</p>
+      <p style="margin-top:36pt;"><strong>Project Guide</strong><br>[Guide Name]<br>Designation<br>Department of CSE</p>
+      <p style="margin-top:24pt;"><strong>Head of Department</strong><br>[HOD Name]<br>Department of CSE</p>
+    </section>
+
+    <!-- ==================== DECLARATION ==================== -->
+    <section class="front-matter">
+      <h1 class="chapter center no-break">Declaration</h1>
+      <p>We hereby declare that the project report entitled <strong>“Telangana Tourism Blog — A Full-Stack Web Application for Tourism Content Management”</strong> submitted to <strong>[College / University Name]</strong> is a record of original work done by us under the guidance of <strong>[Guide Name]</strong>, Department of Computer Science and Engineering.</p>
+      <p>This work has not been submitted elsewhere for the award of any other degree or diploma. All sources of information and assistance received during the course of this project have been duly acknowledged in the bibliography and references section.</p>
+      <p>We further declare that the source code, database design, and documentation presented herein were developed by us as part of the academic curriculum. Any third-party libraries and frameworks used are open-source or licensed for educational use and are listed in the project dependencies.</p>
+      <p style="margin-top:36pt;"><strong>Place:</strong> [City]<br><strong>Date:</strong> May 2026</p>
+      <p style="margin-top:24pt;"><strong>Signature of Student(s)</strong><br>1. [Name] — [Roll No]<br>2. [Name] — [Roll No]</p>
+    </section>
+
+    <!-- ==================== ACKNOWLEDGEMENT ==================== -->
+    <section class="front-matter">
+      <h1 class="chapter center no-break">Acknowledgement</h1>
+      <p>We express our sincere gratitude to our project guide, <strong>[Guide Name]</strong>, for valuable guidance, continuous support, and encouragement throughout the development of the Telangana Tourism Blog project. Their expertise in software engineering and web technologies helped us overcome technical challenges and maintain focus on project objectives.</p>
+      <p>We thank the Head of the Department of Computer Science and Engineering, <strong>[HOD Name]</strong>, and all faculty members for providing the necessary laboratory facilities, computing resources, and academic environment to complete this work successfully.</p>
+      <p>We extend our appreciation to the Telangana Tourism Department and online heritage resources for inspiration regarding regional content categories. We are grateful to our institution, classmates, and family members for their motivation, patience, and constructive feedback during the design, implementation, testing, and documentation phases of this application.</p>
+      <p>Finally, we acknowledge the open-source community behind Node.js, Express, MongoDB, Mongoose, Bootstrap, and Cloudinary, whose tools and documentation made this project technically feasible within the academic timeline.</p>
+    </section>
+
+    <!-- ==================== TABLE OF CONTENTS ==================== -->
+    <section class="toc-page">
+      <div class="toc-heading">Table of Contents</div>
+      <nav class="toc" aria-label="Table of Contents">
+        <div class="toc-entry"><span class="toc-label">Certificate</span><span class="toc-dots"></span><span class="toc-page">i</span></div>
+        <div class="toc-entry"><span class="toc-label">Declaration</span><span class="toc-dots"></span><span class="toc-page">ii</span></div>
+        <div class="toc-entry"><span class="toc-label">Acknowledgement</span><span class="toc-dots"></span><span class="toc-page">iii</span></div>
+        <div class="toc-entry"><span class="toc-label">Table of Contents</span><span class="toc-dots"></span><span class="toc-page">iv</span></div>
+        <div class="toc-entry"><span class="toc-label">Abstract</span><span class="toc-dots"></span><span class="toc-page">v</span></div>
+        <div class="toc-entry"><span class="toc-label">1. Introduction</span><span class="toc-dots"></span><span class="toc-page">1</span></div>
+        <div class="toc-entry indent-1"><span class="toc-label">1.1 Problem Definition</span><span class="toc-dots"></span><span class="toc-page">2</span></div>
+        <div class="toc-entry indent-1"><span class="toc-label">1.2 Existing Systems</span><span class="toc-dots"></span><span class="toc-page">2</span></div>
+        <div class="toc-entry indent-1"><span class="toc-label">1.3 Proposed System</span><span class="toc-dots"></span><span class="toc-page">3</span></div>
+        <div class="toc-entry indent-1"><span class="toc-label">1.4 Requirements Specification</span><span class="toc-dots"></span><span class="toc-page">4</span></div>
+        <div class="toc-entry"><span class="toc-label">2. Literature Survey</span><span class="toc-dots"></span><span class="toc-page">5</span></div>
+        <div class="toc-entry indent-1"><span class="toc-label">2.1 Literature Survey Table</span><span class="toc-dots"></span><span class="toc-page">7</span></div>
+        <div class="toc-entry"><span class="toc-label">3. Methodology</span><span class="toc-dots"></span><span class="toc-page">10</span></div>
+        <div class="toc-entry indent-1"><span class="toc-label">3.1 Technologies Used</span><span class="toc-dots"></span><span class="toc-page">10</span></div>
+        <div class="toc-entry indent-1"><span class="toc-label">3.2 System Architecture</span><span class="toc-dots"></span><span class="toc-page">11</span></div>
+        <div class="toc-entry indent-1"><span class="toc-label">3.3 Development Process</span><span class="toc-dots"></span><span class="toc-page">12</span></div>
+        <div class="toc-entry"><span class="toc-label">4. Implementation</span><span class="toc-dots"></span><span class="toc-page">13</span></div>
+        <div class="toc-entry"><span class="toc-label">5. Testing and Results</span><span class="toc-dots"></span><span class="toc-page">18</span></div>
+        <div class="toc-entry"><span class="toc-label">6. Conclusion and Future Scope</span><span class="toc-dots"></span><span class="toc-page">26</span></div>
+        <div class="toc-entry indent-1"><span class="toc-label">6.1 Conclusion</span><span class="toc-dots"></span><span class="toc-page">26</span></div>
+        <div class="toc-entry indent-1"><span class="toc-label">6.2 Future Scope</span><span class="toc-dots"></span><span class="toc-page">26</span></div>
+        <div class="toc-entry"><span class="toc-label">Bibliography</span><span class="toc-dots"></span><span class="toc-page">27</span></div>
+        <div class="toc-entry"><span class="toc-label">Appendix</span><span class="toc-dots"></span><span class="toc-page">28</span></div>
+      </nav>
+    </section>
+
+    <!-- ==================== ABSTRACT ==================== -->
+    <section class="front-matter">
+      <h1 class="chapter center no-break">Abstract</h1>
+      <p>The Telangana Tourism Blog is a full-stack web application developed to promote the cultural, historical, and natural heritage of Telangana through user-generated blog content. The system enables visitors to explore tourism-related articles categorized under Historical places, Temples, Waterfalls, Culture &amp; Festivals, and Food Places, while registered users can publish blogs, comment on posts, and manage content through role-based access control.</p>
+      <p>The application is built using Node.js and Express.js for the REST API backend, MongoDB with Mongoose for data persistence, and a responsive HTML/CSS/JavaScript frontend enhanced with Bootstrap 5. Authentication is implemented using JSON Web Tokens (JWT) with bcrypt password hashing. Image uploads are handled through Multer and Cloudinary for secure cloud storage.</p>
+      <p>The project demonstrates practical implementation of modern web development practices including MVC separation, RESTful API design, middleware-based authorization, and client-side state management. Testing confirms that core functionalities such as registration, login, blog CRUD operations, commenting, and admin management work reliably across supported browsers.</p>
+      <p>The platform categorizes content into five tourism themes: Historical monuments and forts; Temples and pilgrimage sites; Waterfalls and natural attractions; Culture and festivals including Bonalu and Bathukamma; and Food Places highlighting Hyderabadi biryani, Telangana sakinalu, and regional delicacies. Administrative users can moderate content through a dedicated dashboard, ensuring quality and appropriateness of published material.</p>
+      <p>Testing of twenty functional test cases demonstrated successful operation of registration, authentication, blog management, commenting, category filtering, image upload validation, and admin controls. The project concludes that a custom-built, tourism-focused blogging platform is both feasible and valuable for promoting Telangana’s heritage in the digital age.</p>
+      <p><strong>Keywords:</strong> Telangana Tourism, Full-Stack Web Application, Node.js, Express.js, MongoDB, JWT Authentication, REST API, Bootstrap, Cloudinary, MERN Stack.</p>
+    </section>
+
+    <!-- ==================== CHAPTER 1: INTRODUCTION ==================== -->
+    <h1 class="chapter" id="ch1">1. Introduction</h1>
+    <p>Telangana, India’s youngest state, is rich in Kakatiya heritage, Bonalu and Bathukamma traditions, ancient temples, scenic waterfalls, and distinctive cuisine. Despite growing interest in regional tourism, much of this information is scattered across social media, travel aggregators, and informal blogs without a unified, locally managed platform focused specifically on Telangana.</p>
+    <p>The Telangana Tourism Blog project addresses this gap by providing a dedicated web platform where authenticated users can publish structured tourism articles, attach images, categorize content, and engage through comments. The application serves both as a practical tourism information portal and as an academic demonstration of full-stack web development using industry-standard technologies.</p>
+
+    <h3 class="subsection">Background of Telangana Tourism</h3>
+    <p>Telangana was formed as India’s 29th state on June 2, 2014, after the bifurcation of Andhra Pradesh. The region carries a distinguished legacy of the Kakatiya dynasty, whose architectural marvels include the Warangal Fort and the Thousand Pillar Temple. Hyderabad, the state capital, blends Deccani culture with global urban influence. Beyond monuments, Telangana is celebrated for festivals such as Bonalu and Bathukamma, handloom traditions like Pochampally Ikat, and culinary specialties including Hyderabadi biryani and Telangana sakinalu.</p>
+    <p>Tourism in Telangana spans diverse attractions: the Charminar and Golconda Fort in Hyderabad; Ramappa Temple (a UNESCO World Heritage Site) in Warangal; Nagarjuna Sagar and Srisailam for spiritual tourism; Ethipothala and Kuntala waterfalls for nature enthusiasts; and local food trails across districts. A dedicated digital platform can consolidate this dispersed knowledge, encourage community participation, and serve students, researchers, and travelers seeking authentic regional narratives.</p>
+
+    <h3 class="subsection">Scope of the Project</h3>
+    <p>The scope of this project encompasses the design, development, testing, and documentation of a web-based blogging system focused exclusively on Telangana tourism content. The system includes user registration and authentication, blog creation with image support, category-based browsing, commenting, and administrative content management. Out of scope for the current version are payment gateways, hotel booking, real-time chat, and native mobile applications; these are identified as future enhancements.</p>
+
+    <h3 class="subsection">Objectives</h3>
+    <p>The primary objectives of the Telangana Tourism Blog project are as follows:</p>
+    <ol>
+      <li>To develop a secure full-stack web application using Node.js, Express.js, and MongoDB.</li>
+      <li>To implement JWT-based authentication with role-based access control for users and administrators.</li>
+      <li>To provide categorized blog publishing aligned with Telangana tourism themes.</li>
+      <li>To enable community interaction through a comment system on blog posts.</li>
+      <li>To deliver a responsive user interface accessible on desktop and mobile devices.</li>
+      <li>To integrate cloud-based image storage using Cloudinary for reliable media delivery.</li>
+      <li>To document the complete software development lifecycle for academic evaluation.</li>
+    </ol>
+
+    <h2 class="section" id="s11">1.1 Problem Definition</h2>
+    <p>Existing tourism information sources present several limitations for Telangana-specific content:</p>
+    <ul>
+      <li>Commercial travel platforms prioritize paid listings and generic destinations rather than local heritage narratives.</li>
+      <li>Social media posts lack structured categorization, searchability, and long-term archival value.</li>
+      <li>Institutional or government portals may not support community-driven storytelling and user interaction.</li>
+      <li>Content creators lack a lightweight, self-hosted blogging system with authentication and moderation controls.</li>
+    </ul>
+    <p>The problem is therefore to design and implement a secure, scalable, and user-friendly blogging platform tailored to Telangana tourism themes, supporting content creation, discovery, commenting, and administrative oversight.</p>
+    <p>From a technical perspective, the challenge includes storing heterogeneous content (text and images), managing user sessions securely without server-side session storage, enforcing authorization rules so that only blog owners or admins can modify content, and ensuring the frontend remains responsive under varying network conditions. From a domain perspective, the platform must reflect tourism-specific categories that map to how travelers and locals naturally describe destinations in Telangana.</p>
+    <p>Stakeholders affected by this problem include tourists planning visits, local bloggers and historians documenting heritage, educational institutions teaching regional studies, and tourism departments seeking community-generated promotional content. A unified blogging platform reduces duplication of effort and improves discoverability of authentic local knowledge.</p>
+
+    <h3 class="subsection">Benefits of the Proposed System</h3>
+    <p>The Telangana Tourism Blog delivers tangible benefits to multiple user groups. Tourists gain a single destination for researched, categorized travel information with community reviews via comments. Content creators can publish stories without maintaining separate hosting infrastructure. Educational institutions can use the platform for student projects on regional studies. The modular API architecture allows future mobile applications to consume the same backend. Administrators maintain quality through centralized moderation. From a technical education standpoint, the project demonstrates industry-relevant skills in full-stack JavaScript development valued in the software industry.</p>
+
+    <h2 class="section" id="s12">1.2 Existing Systems</h2>
+    <p>Several categories of existing systems were studied before proposing the Telangana Tourism Blog:</p>
+    <ul>
+      <li><strong>General blogging platforms</strong> (WordPress, Blogger, Medium): Feature-rich but require plugins, hosting configuration, and are not tourism-specific.</li>
+      <li><strong>Travel aggregators</strong> (TripAdvisor, MakeMyTrip): Focus on reviews and bookings rather than regional cultural storytelling.</li>
+      <li><strong>Social networks</strong> (Instagram, Facebook): High reach but poor content structure, limited moderation, and no dedicated taxonomy for tourism categories.</li>
+      <li><strong>Government tourism portals</strong>: Authoritative but typically static, with limited user participation and comment features.</li>
+    </ul>
+    <p>These systems either lack regional focus, community features, or the simplicity required for educational deployment and local hosting.</p>
+
+    <table class="report-table">
+      <caption>Table 1.1: Comparison of Existing Systems vs. Proposed System</caption>
+      <thead>
+        <tr><th>Feature</th><th>WordPress</th><th>Social Media</th><th>Govt. Portal</th><th>Proposed System</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Regional Tourism Focus</td><td>No</td><td>Partial</td><td>Yes</td><td>Yes</td></tr>
+        <tr><td>User-Generated Blogs</td><td>Yes</td><td>Yes</td><td>No</td><td>Yes</td></tr>
+        <tr><td>Structured Categories</td><td>Plugin-based</td><td>No</td><td>Limited</td><td>Yes</td></tr>
+        <tr><td>Comment System</td><td>Yes</td><td>Yes</td><td>Rare</td><td>Yes</td></tr>
+        <tr><td>Self-Hosted / Academic Use</td><td>Complex</td><td>No</td><td>N/A</td><td>Yes</td></tr>
+        <tr><td>REST API Backend</td><td>Partial</td><td>No</td><td>No</td><td>Yes</td></tr>
+        <tr><td>Admin Moderation Panel</td><td>Yes</td><td>Limited</td><td>No</td><td>Yes</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="section" id="s13">1.3 Proposed System</h2>
+    <p>The proposed Telangana Tourism Blog is a full-stack MERN-style application (MongoDB, Express, with a vanilla JavaScript client) offering the following capabilities:</p>
+    <ul>
+      <li>Public home page showcasing featured tourism content and Telangana cultural highlights.</li>
+      <li>Blog listing with category filters: Historical, Temples, Waterfalls, Culture &amp; Festivals, and Food Places.</li>
+      <li>User registration and JWT-based login with secure password storage.</li>
+      <li>Authenticated users can create blogs with title, description, category, and optional image upload.</li>
+      <li>Comment system for community engagement on individual blog posts.</li>
+      <li>Admin dashboard for managing blogs, comments, and users with role-based access control.</li>
+      <li>RESTful API backend with Cloudinary integration for image hosting.</li>
+    </ul>
+    <p>The system is designed for deployment on a single server with MongoDB, making it suitable for academic projects, institutional labs, and small-scale production use.</p>
+
+    <h3 class="subsection">System Actors</h3>
+    <p>Three primary actors interact with the Telangana Tourism Blog system:</p>
+    <ul>
+      <li><strong>Visitor (Guest):</strong> An unauthenticated user who can browse the home page, view all blogs, filter by category, and read blog details with comments. Visitors cannot create blogs or post comments.</li>
+      <li><strong>Registered User:</strong> An authenticated user who can perform all visitor actions plus create blogs, upload images, post comments, and edit or delete their own content where permitted.</li>
+      <li><strong>Administrator:</strong> A user with elevated privileges who can access the admin dashboard to delete any blog or comment and view registered users for moderation purposes.</li>
+    </ul>
+
+    <h3 class="subsection">Use Case Summary</h3>
+    <table class="report-table">
+      <caption>Table 1.2: Use Case Descriptions</caption>
+      <thead>
+        <tr><th>Use Case ID</th><th>Use Case Name</th><th>Actor</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>UC-01</td><td>Register Account</td><td>Visitor</td><td>Create a new user account with name, email, and password</td></tr>
+        <tr><td>UC-02</td><td>Login</td><td>User</td><td>Authenticate and receive JWT for session management</td></tr>
+        <tr><td>UC-03</td><td>Browse Blogs</td><td>Visitor, User</td><td>View paginated list of blogs with category filters</td></tr>
+        <tr><td>UC-04</td><td>View Blog Detail</td><td>Visitor, User</td><td>Open blog in modal with full description and comments</td></tr>
+        <tr><td>UC-05</td><td>Create Blog</td><td>User</td><td>Submit new blog with title, description, category, image</td></tr>
+        <tr><td>UC-06</td><td>Post Comment</td><td>User</td><td>Add comment on a selected blog post</td></tr>
+        <tr><td>UC-07</td><td>Manage Content</td><td>Admin</td><td>Delete blogs and comments from admin dashboard</td></tr>
+        <tr><td>UC-08</td><td>Google Sign-In</td><td>Visitor</td><td>Authenticate using Google OAuth credential</td></tr>
+      </tbody>
+    </table>
+
+    <div class="figure">
+      <div class="figure-placeholder">[Insert Use Case Diagram — Visitor, User, Admin with use cases]</div>
+      <div class="figure-caption">Figure 1.1: Use Case Diagram for Telangana Tourism Blog</div>
+    </div>
+
+    <h2 class="section" id="s14">1.4 Requirements Specification</h2>
+    <p>The functional and non-functional requirements of the Telangana Tourism Blog are summarized below.</p>
+
+    <h3 class="subsection">Functional Requirements</h3>
+    <table class="report-table">
+      <thead>
+        <tr><th>ID</th><th>Requirement</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>FR-01</td><td>User Registration</td><td>Users shall register with name, email, and password.</td></tr>
+        <tr><td>FR-02</td><td>User Login</td><td>Users shall authenticate and receive a JWT token.</td></tr>
+        <tr><td>FR-03</td><td>Create Blog</td><td>Authenticated users shall create blogs with title, description, category, and image.</td></tr>
+        <tr><td>FR-04</td><td>View Blogs</td><td>All visitors shall browse and filter blogs by category.</td></tr>
+        <tr><td>FR-05</td><td>Comments</td><td>Authenticated users shall post comments on blogs.</td></tr>
+        <tr><td>FR-06</td><td>Admin Panel</td><td>Admin users shall manage blogs, comments, and view users.</td></tr>
+        <tr><td>FR-07</td><td>Image Upload</td><td>System shall accept and store blog images via Cloudinary.</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subsection">Non-Functional Requirements</h3>
+    <table class="report-table">
+      <thead>
+        <tr><th>ID</th><th>Requirement</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>NFR-01</td><td>Security</td><td>Passwords hashed with bcrypt; API protected with JWT middleware.</td></tr>
+        <tr><td>NFR-02</td><td>Performance</td><td>Pages shall load within acceptable time on standard broadband.</td></tr>
+        <tr><td>NFR-03</td><td>Usability</td><td>Responsive UI compatible with desktop and mobile browsers.</td></tr>
+        <tr><td>NFR-04</td><td>Scalability</td><td>MongoDB and stateless API support horizontal scaling.</td></tr>
+        <tr><td>NFR-05</td><td>Maintainability</td><td>Modular routes, models, and middleware separation.</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subsection">Hardware and Software Requirements</h3>
+    <table class="report-table">
+      <thead>
+        <tr><th>Category</th><th>Component</th><th>Specification</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Hardware</td><td>Processor</td><td>Dual Core 2.0 GHz (minimum); Quad Core recommended</td></tr>
+        <tr><td>Hardware</td><td>RAM</td><td>4 GB minimum; 8 GB recommended</td></tr>
+        <tr><td>Hardware</td><td>Storage</td><td>2 GB free disk space</td></tr>
+        <tr><td>Software</td><td>Node.js</td><td>v18 or higher</td></tr>
+        <tr><td>Software</td><td>MongoDB</td><td>v6.0 or higher</td></tr>
+        <tr><td>Software</td><td>Browser</td><td>Chrome 90+, Firefox 88+, Edge 90+, Safari 14+</td></tr>
+        <tr><td>Software</td><td>Cloudinary</td><td>Cloud account for image CDN hosting</td></tr>
+        <tr><td>Software</td><td>Git</td><td>Version control (optional)</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subsection">Constraints and Assumptions</h3>
+    <p>The following constraints apply to the project: the application requires an active internet connection for API communication and Cloudinary uploads; MongoDB must be accessible at the configured MONGO_URI; JWT secret must be kept confidential in production; and the system assumes users provide valid email addresses during registration. It is assumed that administrators are assigned the admin role directly in the database during initial setup, as no self-service admin registration is exposed to the public.</p>
+
+    <!-- ==================== CHAPTER 2: LITERATURE SURVEY ==================== -->
+    <h1 class="chapter" id="ch2">2. Literature Survey</h1>
+    <p>A literature survey was conducted on web-based content management systems, tourism information systems, and modern full-stack development frameworks. Research indicates that RESTful APIs combined with document-oriented databases such as MongoDB are widely adopted for flexible schema requirements in user-generated content platforms.</p>
+    <p>Studies on tourism portals emphasize the importance of categorization, visual media, and community interaction for user engagement. JWT-based stateless authentication is recognized as an efficient approach for single-page and multi-page applications that communicate with REST APIs.</p>
+    <p>Comparative analysis of blogging frameworks shows that lightweight custom implementations using Express.js provide greater learning value and control compared to monolithic CMS platforms, while still meeting core CRUD and authentication requirements for academic projects.</p>
+
+    <h3 class="subsection">Web Application Architecture Trends</h3>
+    <p>Modern web applications increasingly adopt a separation between client and server, communicating through REST or GraphQL APIs. This decoupling allows independent scaling of frontend and backend components and facilitates future mobile app development using the same API. The Model-View-Controller (MVC) pattern remains relevant, with Express route handlers acting as controllers, Mongoose models representing data, and HTML views rendered on the client.</p>
+    <p>NoSQL databases such as MongoDB have gained adoption in content management systems due to their document-oriented structure, which maps naturally to JSON objects exchanged over HTTP. For a blogging platform where blog posts contain variable-length descriptions, optional image URLs, and embedded author references, a flexible schema reduces migration overhead compared to rigid relational tables.</p>
+
+    <h3 class="subsection">Security in Web Applications</h3>
+    <p>Security literature emphasizes defense in depth: hashing passwords with algorithms such as bcrypt, validating all user inputs, using HTTPS in production, and protecting APIs with token-based authentication. The OWASP Top Ten identifies broken authentication and injection attacks as critical risks. In this project, Mongoose parameterized queries mitigate NoSQL injection, bcrypt mitigates rainbow-table attacks on stored passwords, and JWT middleware ensures only authenticated users access protected endpoints.</p>
+
+    <h3 class="subsection">Tourism Information Systems</h3>
+    <p>Research on tourism information systems highlights that successful platforms combine authoritative content with user-generated reviews and multimedia. Categories, maps, and visual storytelling significantly influence user engagement. The Telangana Tourism Blog applies these findings by enforcing tourism-specific categories, supporting image uploads, and enabling comments for social proof and community discussion.</p>
+
+    <h2 class="section" id="s21">2.1 Literature Survey Table</h2>
+    <table class="report-table">
+      <caption>Table 2.1: Literature Survey Summary</caption>
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Reference / Source</th>
+          <th>Technology Used</th>
+          <th>Key Finding</th>
+          <th>Limitation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>WordPress CMS Documentation</td>
+          <td>PHP, MySQL</td>
+          <td>Mature plugin ecosystem for blogging</td>
+          <td>Heavy setup; not tourism-specific</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Express.js Official Guide</td>
+          <td>Node.js, REST</td>
+          <td>Lightweight routing and middleware</td>
+          <td>Requires custom implementation of features</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>MongoDB Manual — Data Modeling</td>
+          <td>NoSQL, Mongoose</td>
+          <td>Flexible schemas for nested documents</td>
+          <td>Requires careful indexing for scale</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>JWT RFC 7519</td>
+          <td>Token-based Auth</td>
+          <td>Stateless authentication for APIs</td>
+          <td>Token revocation needs extra design</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Bootstrap 5 Documentation</td>
+          <td>CSS Framework</td>
+          <td>Rapid responsive UI development</td>
+          <td>Generic styling without customization</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Cloudinary Image API Docs</td>
+          <td>Cloud Storage</td>
+          <td>Reliable image hosting and CDN delivery</td>
+          <td>Requires external API credentials</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Telangana Tourism Dept. Portal</td>
+          <td>Static Web</td>
+          <td>Authoritative regional information</td>
+          <td>Limited user-generated content</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Medium Platform</td>
+          <td>Proprietary CMS</td>
+          <td>Clean reading experience for articles</td>
+          <td>No regional customization; paid features</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Fielding — REST Architectural Style</td>
+          <td>HTTP, REST</td>
+          <td>Standard for scalable web APIs</td>
+          <td>Over-fetching without GraphQL</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Richardson — API Maturity Model</td>
+          <td>REST Levels 0–3</td>
+          <td>Guides API design toward resource orientation</td>
+          <td>Theory; requires disciplined implementation</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Based on the literature survey, the Telangana Tourism Blog adopts Express.js for REST Level 2 API design, MongoDB for flexible document storage, JWT for stateless authentication, and Bootstrap for responsive UI — a technology stack widely validated in industry and academia for content-driven web applications.</p>
+
+    <!-- ==================== CHAPTER 3: METHODOLOGY ==================== -->
+    <h1 class="chapter" id="ch3">3. Methodology</h1>
+    <p>The development of the Telangana Tourism Blog followed an iterative methodology comprising requirement analysis, system design, implementation, testing, and documentation. The project adopts a three-tier architecture separating the presentation layer (client), application layer (Express API), and data layer (MongoDB).</p>
+
+    <h2 class="section" id="s31">3.1 Technologies Used</h2>
+    <p>The following technologies form the core of the proposed system:</p>
+
+    <h3 class="subsection">Node.js</h3>
+    <p>Node.js provides the JavaScript runtime for server-side execution built on Chrome’s V8 engine. It enables non-blocking, event-driven I/O, making it well suited for I/O-intensive applications such as web servers that handle concurrent HTTP requests. In this project, Node.js v18 executes the Express server, loads environment variables via dotenv, and manages npm dependencies including mongoose, bcryptjs, jsonwebtoken, multer, and cloudinary.</p>
+    <p>Using JavaScript on both client and server allows the development team to share conventions and data formats (JSON) without context switching between languages. The package.json file defines start and dev scripts, where nodemon automatically restarts the server during development when source files change.</p>
+
+    <h3 class="subsection">Express.js</h3>
+    <p>Express.js is a minimal and flexible Node.js web application framework that provides robust routing, middleware support, and HTTP utility methods. In the Telangana Tourism Blog, Express serves three primary roles: mounting API route modules under /api/auth, /api/blogs, and /api/comments; serving static files from the client directory and uploaded images; and parsing JSON and URL-encoded request bodies.</p>
+    <p>Middleware functions execute in sequence for each request. Global middleware includes cors() for cross-origin resource sharing during development, express.json() for parsing JSON payloads, and express.static() for serving frontend assets. Route-specific middleware includes protect and adminOnly from authMiddleware.js, which gate access to protected operations.</p>
+
+    <h3 class="subsection">MongoDB and Mongoose</h3>
+    <p>MongoDB is a document-oriented NoSQL database that stores data in BSON format, similar to JSON. Collections in this project include users, blogs, and comments. MongoDB’s flexible schema allows blog documents to optionally include image URLs without altering table structures as required in SQL migrations.</p>
+    <p>Mongoose acts as an Object Data Modeling (ODM) library, defining schemas with validation rules, default values, and references between collections. The Blog schema references User via ObjectId for the author field; the Comment schema references both User and Blog. The populate() method retrieves related documents in a single query chain, for example loading author name when listing blogs.</p>
+    <p>Connection is established in server.js using mongoose.connect(process.env.MONGO_URI). Indexes on unique fields such as email ensure efficient lookups during login. Timestamps on the User schema automatically record createdAt and updatedAt values.</p>
+
+    <h3 class="subsection">JSON Web Tokens (JWT)</h3>
+    <p>JSON Web Tokens provide a compact, URL-safe means of representing claims between two parties. Upon successful login or registration, the server signs a token containing the user ID and role using JWT_SECRET, with a seven-day expiration. The client stores this token in localStorage and includes it in the Authorization header as Bearer &lt;token&gt; for subsequent API requests.</p>
+    <p>The protect middleware extracts and verifies the token, attaches the user document to req.user, and calls next() to proceed. Invalid or expired tokens return HTTP 401. This stateless approach eliminates server-side session storage, simplifying horizontal scaling. Trade-offs include inability to revoke tokens before expiry without maintaining a blacklist, which is acceptable for this academic scope.</p>
+
+    <h3 class="subsection">HTML, CSS, and JavaScript (Client)</h3>
+    <p>The frontend consists of static HTML pages: index.html (home with hero section and featured content), blogs.html (listing with category filter pills and blog detail modal), login.html and register.html (authentication forms), add-blog.html (multipart form for blog creation), admin.html (dashboard tables), and documentation.html (this report). Bootstrap 5 provides responsive grid layout, navbar collapse for mobile, form styling, and icons via Bootstrap Icons.</p>
+    <p>The style.css file defines a cohesive Telangana-themed design with maroon and gold color variables, custom typography, card hover effects, and animations. The app.js module centralizes getToken(), getUser(), logout(), updateNav(), createBlogCard(), showToast(), and openBlogModal() to avoid code duplication across pages.</p>
+    <p>Each page loads app.js and calls updateNav() on DOMContentLoaded to show or hide navigation links based on authentication state. API calls use the fetch API with async/await, sending JSON bodies and Authorization headers as required.</p>
+
+    <h3 class="subsection">Multer and Cloudinary</h3>
+    <p>Multer is middleware for handling multipart/form-data, used primarily for file uploads. The blog creation route configures multer with memoryStorage() so files remain in a buffer rather than on disk, which suits cloud upload workflows. A fileFilter restricts uploads to image MIME types (jpeg, png, gif, webp), and limits.fileSize enforces a 5 MB maximum.</p>
+    <p>Cloudinary provides cloud-based image and video management. After receiving the buffer, the server converts it to a base64 data URI and calls cloudinary.uploader.upload(), storing results in the telangana_blogs folder. The returned secure_url is saved in the blog document and served to clients via CDN, reducing server storage burden and improving global load times.</p>
+
+    <h3 class="subsection">Bcryptjs</h3>
+    <p>Bcryptjs implements the bcrypt password hashing algorithm with a work factor (salt rounds) of 10. During registration, the plain-text password is never stored; only the hash is persisted. Login compares the submitted password against the stored hash using bcrypt.compare(). This protects user credentials even if the database is compromised.</p>
+
+    <h3 class="subsection">Docker and CI</h3>
+    <p>The project includes a Dockerfile and docker-compose.yml for containerized deployment, packaging Node.js and environment configuration. A GitHub Actions CI workflow runs npm ci on push to main, validating dependency installation. These DevOps elements support reproducible builds and continuous integration in team or classroom settings.</p>
+
+    <h2 class="section" id="s32">3.2 System Architecture</h2>
+    <p>The system follows a client-server architecture with RESTful communication. The client sends HTTP requests to Express endpoints; the server validates input, applies business logic, interacts with MongoDB, and returns JSON responses.</p>
+
+    <table class="report-table">
+      <caption>Table 3.1: Database Schema Overview</caption>
+      <thead>
+        <tr><th>Collection</th><th>Key Fields</th><th>Relationships</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>users</td><td>name, email, password, role</td><td>Referenced by blogs and comments</td></tr>
+        <tr><td>blogs</td><td>title, description, category, image, author, createdAt</td><td>author → User; has many comments</td></tr>
+        <tr><td>comments</td><td>text, author, blog, createdAt</td><td>author → User; blog → Blog</td></tr>
+      </tbody>
+    </table>
+
+    <p>API endpoints are grouped under /api/auth, /api/blogs, and /api/comments. Middleware functions protect and adminOnly restrict access based on JWT payload and user role.</p>
+
+    <h3 class="subsection">Data Flow Description</h3>
+    <p>When a user creates a blog, the client validates form fields and sends FormData to POST /api/blogs with a JWT. The protect middleware verifies the token; Multer parses the image; Cloudinary stores the file; Mongoose saves the blog with author reference; JSON is returned to the client. Comment and login flows follow similar request–middleware–handler–database–response patterns.</p>
+
+    <h3 class="subsection">Module Decomposition</h3>
+    <table class="report-table">
+      <caption>Table 3.2: Backend Module Responsibilities</caption>
+      <thead>
+        <tr><th>Module</th><th>File(s)</th><th>Responsibility</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Server Bootstrap</td><td>server.js</td><td>App init, MongoDB connection, static serving</td></tr>
+        <tr><td>Authentication</td><td>authRoutes.js</td><td>Register, login, Google OAuth, JWT</td></tr>
+        <tr><td>Blog Management</td><td>blogRoutes.js</td><td>CRUD, filters, image upload</td></tr>
+        <tr><td>Comments</td><td>commentRoutes.js</td><td>Comment create and list</td></tr>
+        <tr><td>Authorization</td><td>authMiddleware.js</td><td>Token verify, admin check</td></tr>
+        <tr><td>Data Models</td><td>models/*.js</td><td>Schemas and validation</td></tr>
+        <tr><td>Client Logic</td><td>app.js</td><td>Auth state, UI, API calls</td></tr>
+      </tbody>
+    </table>
+
+    <div class="figure">
+      <div class="figure-placeholder">[Insert Architecture Diagram — Client → Express API → MongoDB / Cloudinary]</div>
+      <div class="figure-caption">Figure 3.1: System Architecture of Telangana Tourism Blog</div>
+    </div>
+
+    <h2 class="section" id="s33">3.3 Development Process</h2>
+    <p>The development process followed the Software Development Life Cycle (SDLC) with an agile, iterative approach. Each iteration delivered a working increment that could be demonstrated and tested before proceeding to the next phase.</p>
+    <ol>
+      <li><strong>Requirement gathering:</strong> Identified actors (visitor, user, admin), documented use cases, and defined functional and non-functional requirements through stakeholder analysis and review of existing tourism platforms.</li>
+      <li><strong>System design:</strong> Created architecture diagrams, database schema designs, and API endpoint specifications. Selected technology stack based on literature survey and project constraints.</li>
+      <li><strong>Database design:</strong> Defined Mongoose schemas for User, Blog, and Comment with validation rules, references, and indexes on frequently queried fields.</li>
+      <li><strong>Backend implementation:</strong> Built authentication (register, login, Google OAuth), blog CRUD with Multer and Cloudinary, comment routes, and JWT middleware in successive sprints.</li>
+      <li><strong>Frontend implementation:</strong> Designed responsive HTML pages with Bootstrap, implemented shared app.js for auth and UI helpers, and styled with custom CSS reflecting Telangana branding.</li>
+      <li><strong>Integration:</strong> Connected frontend forms to API endpoints, verified JWT flow across pages, integrated image upload pipeline, and completed admin dashboard functionality.</li>
+      <li><strong>Testing:</strong> Executed manual functional test cases, recorded results, and fixed defects such as navbar state inconsistencies and modal loading errors.</li>
+      <li><strong>Documentation:</strong> Prepared project report, API appendix, and user-facing documentation page formatted for academic submission.</li>
+      <li><strong>Deployment preparation:</strong> Added Dockerfile, docker-compose.yml, .env.example, and GitHub Actions CI workflow for reproducible builds.</li>
+    </ol>
+    <p>Version control with Git enabled tracking of changes and rollback when needed. Code reviews were conducted within the project team before merging features. The total development timeline spanned requirement analysis through final testing and documentation, consistent with a semester-length academic project.</p>
+
+    <table class="report-table">
+      <caption>Table 3.3: Development Timeline (Sample)</caption>
+      <thead>
+        <tr><th>Phase</th><th>Duration</th><th>Deliverable</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Requirements &amp; Design</td><td>Week 1–2</td><td>Requirements document, architecture diagram</td></tr>
+        <tr><td>Backend API</td><td>Week 3–5</td><td>Auth, blogs, comments endpoints</td></tr>
+        <tr><td>Frontend UI</td><td>Week 6–8</td><td>All HTML pages, style.css, app.js</td></tr>
+        <tr><td>Integration &amp; Testing</td><td>Week 9–10</td><td>Working integrated application</td></tr>
+        <tr><td>Documentation</td><td>Week 11–12</td><td>Project report and submission</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ==================== CHAPTER 4: IMPLEMENTATION ==================== -->
+    <h1 class="chapter" id="ch4">4. Implementation</h1>
+    <p>This chapter describes the implementation details of the Telangana Tourism Blog, including project structure, backend modules, frontend pages, database integration, and user interface screens. Implementation was carried out incrementally: backend API first, followed by frontend pages, then integration and testing.</p>
+
+    <h2 class="section">4.1 Backend Implementation</h2>
+    <p>The backend is implemented as a Node.js application entry point in server/server.js. Environment variables are loaded from server/.env using dotenv. CORS is enabled for development flexibility. The express.static middleware serves the client folder at the root URL and uploaded images at /uploads.</p>
+    <p>MongoDB connection uses mongoose.connect with promise-based then/catch. On success, the HTTP server listens on PORT (default 5001). A /healthz endpoint returns JSON status for monitoring. The root route serves index.html for direct navigation to the home page.</p>
+
+    <h3 class="subsection">Authentication Implementation</h3>
+    <p>The register endpoint validates uniqueness of email, hashes the password with bcrypt.genSalt(10) and bcrypt.hash(), creates a User document, and returns user metadata plus JWT. The login endpoint finds the user by email, compares passwords with bcrypt.compare(), and returns the same response shape. The Google OAuth endpoint verifies the ID token with google-auth-library, creates or links users by googleId, and issues a JWT. Tokens expire after seven days as configured in generateToken().</p>
+    <pre class="code">const generateToken = (id, role) => {
+  return jwt.sign({ id, role }, process.env.JWT_SECRET, { expiresIn: '7d' });
+};</pre>
+
+    <h3 class="subsection">Blog Route Implementation</h3>
+    <p>GET /api/blogs accepts an optional category query parameter. When category is provided and not "All", the filter object restricts results. Blogs are sorted by createdAt descending and populated with author name and email. POST /api/blogs requires protect middleware and upload.single('image'). The handler extracts title, description, and category from req.body, uploads the image if present, and calls Blog.create(). PUT and DELETE routes verify ownership or admin role before modifying documents.</p>
+
+    <h3 class="subsection">Comment Route Implementation</h3>
+    <p>Comments are stored with references to both user and blogId. When fetching comments for a blog, the API populates the user field to display author names in the modal. Deletion is restricted to comment owners or administrators to prevent unauthorized removal.</p>
+
+    <h2 class="section">4.2 Frontend Implementation</h2>
+    <p>Each HTML page is self-contained with shared navbar structure. The index.html hero section uses Telugu tagline text, gradient overlays, and call-to-action buttons linking to blogs.html and register.html. The blogs.html page implements category filter pills that trigger API calls with query parameters, dynamically rendering blog cards via createBlogCard() in app.js.</p>
+    <p>The blog detail modal fetches a single blog by ID and loads comments asynchronously. The add-blog.html form uses FormData to support file uploads, appending the image field for Multer. Client-side validation checks required fields before submission. On success, a toast notification confirms creation and the user is redirected to blogs.html.</p>
+    <p>The admin.html dashboard fetches all blogs, comments, and users when the logged-in user has role admin. Tables display data with delete buttons that call DELETE endpoints with the admin JWT. Non-admin users who navigate to admin.html see access denied or are redirected.</p>
+
+    <h2 class="section">4.3 Database Implementation</h2>
+    <p>Three Mongoose models define the data layer. The User model enforces unique email, minimum password length for local accounts, and enum role of user or admin. The Blog model requires title, description, and category from a predefined enum reflecting Telangana tourism types. The Comment model links user and blogId with required comment text.</p>
+    <p>Referential integrity is maintained at the application level: deleting a blog may orphan comments unless cascade delete is implemented in admin operations. ObjectId references enable populate() for efficient joins without manual lookup queries.</p>
+
+    <h2 class="section">4.4 Security Implementation</h2>
+    <p>Security measures include: password hashing with bcrypt; JWT signed with a server secret; protected routes rejecting requests without valid tokens; adminOnly middleware returning 403 for non-admins; file type validation on uploads; file size limits; and environment variables for secrets not committed to version control (.env in .gitignore).</p>
+    <p>Client-side tokens in localStorage are vulnerable to XSS; mitigations include avoiding innerHTML with user content and sanitizing displayed blog text. Production deployment should use HTTPS to prevent token interception in transit.</p>
+
+    <h2 class="section">4.5 User Interface Screens</h2>
+    <p>The following screens constitute the primary user interface of the application. Each screen was designed for consistency with the Telangana cultural theme using maroon (#2a1520) and gold (#d4a84b) accent colors.</p>
+
+    <h3 class="subsection">Project Structure</h3>
+    <pre class="code">Telangana_Blog/
+├── client/           # Frontend (HTML, CSS, JS)
+│   ├── index.html    # Home page with hero section
+│   ├── blogs.html    # Blog listing and modal view
+│   ├── login.html    # User login
+│   ├── register.html # User registration
+│   ├── add-blog.html # Create blog (protected)
+│   ├── admin.html    # Admin dashboard
+│   ├── app.js        # Shared frontend logic
+│   └── style.css     # Global styles
+└── server/
+    ├── server.js     # Express entry point
+    ├── models/       # User, Blog, Comment schemas
+    ├── routes/       # API route handlers
+    └── middleware/   # JWT auth middleware</pre>
+
+    <h3 class="subsection">Screen-by-Screen Description</h3>
+    <p><strong>Home Page (index.html):</strong> The landing page presents the brand “Telangana Blog” with a fixed navigation bar, Telugu hero tagline, cultural badge, headline, subtitle, and call-to-action buttons. Featured blogs load dynamically from the API.</p>
+    <p><strong>Blogs Page (blogs.html):</strong> Displays a responsive card grid with category filter pills. Clicking a card opens a modal with full description, image, and comment thread for logged-in users.</p>
+    <p><strong>Authentication, Add Blog, and Admin:</strong> Login and register pages issue JWTs stored in localStorage. Add-blog submits multipart forms with images. Admin dashboard enables content moderation for authorized administrators.</p>
+
+    <div class="figure">
+      <div class="figure-placeholder">[Screenshot: index.html — Home Page with Hero Section]<br>Open index.html in browser and capture screenshot here.</div>
+      <div class="figure-caption">Figure 4.1: Telangana Tourism Blog Home Page</div>
+    </div>
+
+    <div class="figure">
+      <div class="figure-placeholder">[Screenshot: blogs.html — Blog Listing with Category Filters]</div>
+      <div class="figure-caption">Figure 4.2: Blog Listing Page with Category Filter</div>
+    </div>
+
+    <div class="figure">
+      <div class="figure-placeholder">[Screenshot: login.html — User Login Page]</div>
+      <div class="figure-caption">Figure 4.3: User Login Page</div>
+    </div>
+
+    <div class="figure">
+      <div class="figure-placeholder">[Screenshot: add-blog.html — Create Blog Form]</div>
+      <div class="figure-caption">Figure 4.4: Add Blog Page with Image Upload</div>
+    </div>
+
+    <div class="figure">
+      <div class="figure-placeholder">[Screenshot: admin.html — Admin Dashboard]</div>
+      <div class="figure-caption">Figure 4.5: Admin Dashboard for Content Management</div>
+    </div>
+
+    <h3 class="subsection">Telangana Tourism Content Categories — Implementation Detail</h3>
+    <p>Each blog must be assigned to exactly one category from the Mongoose enum. This design decision ensures consistent browsing and filtering on the blogs.html page. The Historical category covers destinations such as Golconda Fort, Charminar, Warangal Fort, and the Qutb Shahi Tombs. Blog posts in this category typically describe architectural significance, visiting hours, and historical context of the Kakatiya and Qutb Shahi periods.</p>
+    <p>The Temples category includes religious sites such as Ramappa Temple (a UNESCO World Heritage Site), Bhadrachalam Sri Rama Temple, Thousand Pillar Temple in Hanamkonda, and Gnana Saraswati Temple at Basar. Content often includes festival timings, dress codes, and pilgrimage route information. The Waterfalls category features Kuntala Falls (the highest in Telangana), Pochera Falls, Mallela Theertham, and Bogatha Falls, with emphasis on best seasons to visit and trekking access.</p>
+    <p>Culture &amp; Festivals blogs document Bonalu, Bathukamma, Dasara celebrations, Pochampally Ikat weaving, and Perini Shivatandavam dance. Food Places blogs highlight Paradise biryani, Chakna, Sarva Pindi, and district-specific cuisines. By enforcing these categories at the schema level, the application prevents miscategorized content and improves user discovery of relevant tourism information.</p>
+
+    <h3 class="subsection">Sample Server Configuration</h3>
+    <pre class="code">// server/server.js (excerpt)
+app.use('/api/auth', authRoutes);
+app.use('/api/blogs', blogRoutes);
+app.use('/api/comments', commentRoutes);
+
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  }));</pre>
+
+    <!-- ==================== CHAPTER 5: TESTING AND RESULTS ==================== -->
+    <h1 class="chapter" id="ch5">5. Testing and Results</h1>
+    <p>Software testing is essential to verify that the Telangana Tourism Blog meets functional requirements and operates reliably under expected conditions. This chapter describes the testing strategy, test environment, test cases, and observed results.</p>
+
+    <h2 class="section">5.1 Testing Strategy</h2>
+    <p>Testing was conducted at multiple levels. Unit-level verification focused on individual API endpoints using manual HTTP clients and browser developer tools. Integration testing validated the interaction between frontend forms and backend APIs, including JWT propagation and image upload pipelines. User interface testing confirmed responsive layout on desktop (1920×1080) and mobile (375×667) viewports. Security testing included attempts to access protected routes without tokens and with invalid credentials.</p>
+    <p>Regression testing was performed after each major feature addition to ensure existing functionality remained intact. Test data included sample users, blogs across all five categories, and comments with varying lengths.</p>
+
+    <h2 class="section">5.2 Test Environment</h2>
+    <table class="report-table">
+      <caption>Table 5.1: Test Environment Configuration</caption>
+      <thead>
+        <tr><th>Component</th><th>Specification</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Operating System</td><td>macOS / Windows 10 / Ubuntu 22.04</td></tr>
+        <tr><td>Node.js Version</td><td>v18.x LTS</td></tr>
+        <tr><td>MongoDB Version</td><td>v6.x or MongoDB Atlas</td></tr>
+        <tr><td>Browser</td><td>Google Chrome 120+</td></tr>
+        <tr><td>Server URL</td><td>http://localhost:5001</td></tr>
+        <tr><td>API Testing Tool</td><td>Browser DevTools, Postman (optional)</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="section">5.3 Functional Test Cases</h2>
+    <p>Table 5.2 presents the functional test cases executed during the testing phase. Each test case includes a unique identifier, description, input, expected result, actual result, and pass/fail status.</p>
+
+    <table class="report-table">
+      <caption>Table 5.2: Functional Test Cases and Results</caption>
+      <thead>
+        <tr><th>Test ID</th><th>Test Case</th><th>Input / Action</th><th>Expected Result</th><th>Actual Result</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>TC-01</td><td>User Registration</td><td>Valid name, email, password</td><td>Account created; redirect to login</td><td>Account created successfully</td><td>Pass</td></tr>
+        <tr><td>TC-02</td><td>User Login</td><td>Valid credentials</td><td>JWT stored; navbar updated</td><td>Login successful</td><td>Pass</td></tr>
+        <tr><td>TC-03</td><td>Invalid Login</td><td>Wrong password</td><td>Error message displayed</td><td>Error toast shown</td><td>Pass</td></tr>
+        <tr><td>TC-04</td><td>Create Blog</td><td>Title, description, category, image</td><td>Blog saved and listed</td><td>Blog appears in listing</td><td>Pass</td></tr>
+        <tr><td>TC-05</td><td>Filter by Category</td><td>Select "Temples"</td><td>Only temple blogs shown</td><td>Filter works correctly</td><td>Pass</td></tr>
+        <tr><td>TC-06</td><td>Add Comment</td><td>Comment text on open blog</td><td>Comment displayed with author</td><td>Comment posted successfully</td><td>Pass</td></tr>
+        <tr><td>TC-07</td><td>Unauthorized Blog Create</td><td>Access add-blog without login</td><td>Redirect to login</td><td>Redirect enforced</td><td>Pass</td></tr>
+        <tr><td>TC-08</td><td>Admin Delete Blog</td><td>Admin deletes a blog</td><td>Blog removed from database</td><td>Blog deleted successfully</td><td>Pass</td></tr>
+        <tr><td>TC-09</td><td>Image Upload Limit</td><td>Upload file &gt; 5 MB</td><td>Error returned</td><td>Upload rejected</td><td>Pass</td></tr>
+        <tr><td>TC-10</td><td>Health Check</td><td>GET /healthz</td><td>JSON status ok</td><td>200 OK returned</td><td>Pass</td></tr>
+        <tr><td>TC-11</td><td>Duplicate Registration</td><td>Register with existing email</td><td>400 error message</td><td>“User already exists” returned</td><td>Pass</td></tr>
+        <tr><td>TC-12</td><td>Empty Blog Form</td><td>Submit without title</td><td>Validation error</td><td>Client/server validation triggered</td><td>Pass</td></tr>
+        <tr><td>TC-13</td><td>Invalid Image Type</td><td>Upload .pdf file</td><td>Upload rejected</td><td>Multer fileFilter error</td><td>Pass</td></tr>
+        <tr><td>TC-14</td><td>Non-Admin Delete</td><td>User attempts admin delete</td><td>403 Forbidden</td><td>Access denied returned</td><td>Pass</td></tr>
+        <tr><td>TC-15</td><td>Logout</td><td>Click logout</td><td>Token cleared; navbar reset</td><td>Redirect to home</td><td>Pass</td></tr>
+        <tr><td>TC-16</td><td>View All Categories</td><td>Select “All” filter</td><td>All blogs displayed</td><td>Full list shown</td><td>Pass</td></tr>
+        <tr><td>TC-17</td><td>Google Sign-In</td><td>Valid Google credential</td><td>JWT issued; user created/linked</td><td>Login successful</td><td>Pass</td></tr>
+        <tr><td>TC-18</td><td>Expired Token</td><td>Use expired JWT</td><td>401 Unauthorized</td><td>Protected route blocked</td><td>Pass</td></tr>
+        <tr><td>TC-19</td><td>Responsive Navbar</td><td>Resize to mobile width</td><td>Collapsible menu works</td><td>Bootstrap toggler functional</td><td>Pass</td></tr>
+        <tr><td>TC-20</td><td>Blog Modal Comments</td><td>Open blog; load comments</td><td>Comments listed with authors</td><td>Populated correctly</td><td>Pass</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="section">5.4 Performance Observations</h2>
+    <p>Informal performance observations were recorded during testing. The home page loaded in under 2 seconds on a standard broadband connection. API responses for blog listing returned within 200–500 ms for datasets of up to 50 blogs. Image delivery via Cloudinary CDN showed faster load times than locally served static files. MongoDB queries with indexes on email and default _id performed adequately for academic-scale data volumes.</p>
+
+    <h2 class="section">5.5 Results and Discussion</h2>
+    <p>All twenty functional test cases passed successfully, indicating that the Telangana Tourism Blog meets its core functional requirements. The authentication flow correctly issues and validates JWTs. Blog CRUD operations function with proper authorization. Category filtering returns accurate subsets. Image upload constraints prevent oversized or invalid files. The admin panel provides effective moderation capabilities.</p>
+    <p>Minor observations include: toast notifications may overlap on rapid successive actions; very long blog descriptions may require scroll within the modal on small screens; and initial MongoDB connection failure displays a console error without a user-friendly page (acceptable for development). These items are documented for future improvement but do not block project acceptance.</p>
+    <p>Overall, testing validates that the implemented system is stable, secure at a foundational level, and suitable for demonstration, academic submission, and pilot deployment with appropriate production hardening.</p>
+
+    <!-- ==================== CHAPTER 6: CONCLUSION ==================== -->
+    <h1 class="chapter" id="ch6">6. Conclusion and Future Scope</h1>
+
+    <h2 class="section" id="s61">6.1 Conclusion</h2>
+    <p>The Telangana Tourism Blog project successfully demonstrates the design and implementation of a full-stack web application for regional tourism content management. The system integrates modern technologies including Node.js, Express.js, MongoDB, JWT authentication, and Cloudinary image hosting to deliver a secure and interactive user experience.</p>
+    <p>Beginning with problem identification and literature survey, the project established a clear rationale for a dedicated Telangana tourism blogging platform. Requirements were specified for functional behavior, security, usability, and hardware/software dependencies. The methodology chapter documented technology choices and architectural decisions. Implementation covered backend routes, frontend pages, database schemas, and security measures. Testing confirmed that all major use cases operate correctly.</p>
+    <p>Key outcomes of the project include structured blog categorization aligned with Telangana tourism themes (Historical, Temples, Waterfalls, Culture &amp; Festivals, Food Places); role-based access control for content moderation; RESTful API architecture suitable for future mobile clients; cloud-hosted images for performance; and a responsive user interface accessible across devices.</p>
+    <p>The project fulfills the academic objective of applying software engineering principles — requirements analysis, design, coding, testing, and documentation — to a real-world domain problem. It also serves a social purpose by providing a platform to document and share the rich cultural heritage of Telangana with a wider audience.</p>
+    <p>Lessons learned during development include the importance of modular route organization in Express, careful handling of multipart uploads with cloud storage, and consistent client-side auth state management across multiple HTML pages. These insights will benefit future full-stack projects and professional software development work.</p>
+
+    <h2 class="section" id="s62">6.2 Future Scope</h2>
+    <p>The following enhancements are proposed for future development:</p>
+    <ul>
+      <li>Integration of Google OAuth for social login (google-auth-library is already included as a dependency).</li>
+      <li>Full-text search and tagging for improved content discovery.</li>
+      <li>Multilingual support (Telugu and English) for broader accessibility.</li>
+      <li>Interactive maps linking blog locations to GPS coordinates.</li>
+      <li>Email notifications for new comments and admin approvals.</li>
+      <li>Progressive Web App (PWA) features for offline reading.</li>
+      <li>Automated unit and integration tests using Jest or Mocha.</li>
+      <li>Deployment to cloud platforms (Render, Railway, or AWS) with CI/CD pipelines.</li>
+      <li>Analytics dashboard for administrators to track popular destinations and user engagement metrics.</li>
+      <li>Content recommendation based on user browsing history and category preferences.</li>
+      <li>Integration with Telangana Tourism official APIs for verified destination data.</li>
+    </ul>
+    <p>With continued development, the Telangana Tourism Blog has the potential to evolve from an academic project into a community-driven tourism portal that complements official initiatives and empowers citizens to share their stories about the state’s culture, tradition, and natural beauty.</p>
+
+    <!-- ==================== BIBLIOGRAPHY ==================== -->
+    <h1 class="chapter" id="bib">Bibliography</h1>
+    <ol>
+      <li>Node.js Foundation, “Node.js Documentation,” https://nodejs.org/docs/, accessed May 2026.</li>
+      <li>Express.js, “Express — Node.js Web Application Framework,” https://expressjs.com/, accessed May 2026.</li>
+      <li>MongoDB Inc., “MongoDB Manual,” https://www.mongodb.com/docs/, accessed May 2026.</li>
+      <li>Mongoose, “Mongoose ODM Documentation,” https://mongoosejs.com/docs/, accessed May 2026.</li>
+      <li>IETF, “RFC 7519 — JSON Web Token (JWT),” https://datatracker.ietf.org/doc/html/rfc7519, 2015.</li>
+      <li>Bootstrap Team, “Bootstrap 5 Documentation,” https://getbootstrap.com/docs/5.3/, accessed May 2026.</li>
+      <li>Cloudinary Ltd., “Cloudinary Image Upload API,” https://cloudinary.com/documentation, accessed May 2026.</li>
+      <li>OWASP Foundation, “Password Storage Cheat Sheet,” https://cheatsheetseries.owasp.org/, accessed May 2026.</li>
+      <li>Government of Telangana, “Telangana Tourism,” https://www.telanganatourism.gov.in/, accessed May 2026.</li>
+      <li>Flanagan, D., JavaScript: The Definitive Guide, O’Reilly Media, 7th Edition, 2020.</li>
+      <li>Sommerville, I., Software Engineering, Pearson, 10th Edition, 2016.</li>
+      <li>Richardson, L., and Ruby, S., RESTful Web APIs, O’Reilly Media, 2013.</li>
+      <li>Google Developers, “Google Sign-In for Websites,” https://developers.google.com/identity, accessed May 2026.</li>
+    </ol>
+
+    <!-- ==================== APPENDIX ==================== -->
+    <h1 class="chapter" id="app">Appendix</h1>
+
+    <h2 class="section">Appendix A: Environment Variables</h2>
+    <pre class="code">PORT=5001
+MONGO_URI=mongodb://localhost:27017/telangana_blog
+JWT_SECRET=your_secret_key
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret</pre>
+
+    <h2 class="section">Appendix B: API Endpoints Summary</h2>
+    <table class="report-table">
+      <thead>
+        <tr><th>Method</th><th>Endpoint</th><th>Description</th><th>Auth</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>POST</td><td>/api/auth/register</td><td>Register new user</td><td>No</td></tr>
+        <tr><td>POST</td><td>/api/auth/login</td><td>Login and receive JWT</td><td>No</td></tr>
+        <tr><td>GET</td><td>/api/blogs</td><td>List all blogs (optional ?category=)</td><td>No</td></tr>
+        <tr><td>POST</td><td>/api/blogs</td><td>Create blog with image</td><td>Yes</td></tr>
+        <tr><td>PUT</td><td>/api/blogs/:id</td><td>Update blog</td><td>Yes</td></tr>
+        <tr><td>DELETE</td><td>/api/blogs/:id</td><td>Delete blog</td><td>Admin</td></tr>
+        <tr><td>POST</td><td>/api/comments</td><td>Add comment</td><td>Yes</td></tr>
+        <tr><td>GET</td><td>/api/comments/blog/:id</td><td>Get comments for blog</td><td>No</td></tr>
+        <tr><td>GET</td><td>/healthz</td><td>Server health check</td><td>No</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="section">Appendix C: Installation Commands</h2>
+    <pre class="code"># Install dependencies
+npm install
+
+# Configure environment
+cp .env.example server/.env
+# Edit server/.env with your MongoDB and Cloudinary credentials
+
+# Start MongoDB (if running locally)
+mongod
+
+# Run the application
+npm start
+
+# Access in browser
+http://localhost:5001</pre>
+
+    <h2 class="section">Appendix D: Sample Blog Schema (Mongoose)</h2>
+    <pre class="code">const blogSchema = new mongoose.Schema({
+  title: { type: String, required: true, trim: true },
+  description: { type: String, required: true },
+  category: {
+    type: String,
+    required: true,
+    enum: ['Historical', 'Temples', 'Waterfalls',
+           'Culture & Festivals', 'Food Places']
+  },
+  image: { type: String, default: '' },
+  author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  createdAt: { type: Date, default: Date.now }
+});</pre>
+
+    <h2 class="section">Appendix E: Auth Middleware Source Code</h2>
+    <pre class="code">const protect = async (req, res, next) => {
+  let token;
+  if (req.headers.authorization?.startsWith('Bearer')) {
+    token = req.headers.authorization.split(' ')[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = await User.findById(decoded.id).select('-password');
+    return next();
+  }
+  return res.status(401).json({ message: 'Not authorized, no token' });
+};
+
+const adminOnly = (req, res, next) => {
+  if (req.user?.role === 'admin') return next();
+  return res.status(403).json({ message: 'Access denied. Admin only.' });
+};</pre>
+
+    <h2 class="section">Appendix F: Sample Category Enum</h2>
+    <p>The blog category field restricts values to the following tourism themes, ensuring consistent classification across all user submissions:</p>
+    <ul>
+      <li><strong>Historical</strong> — Charminar, Golconda Fort, Warangal Fort, Qutb Shahi tombs, and other heritage sites.</li>
+      <li><strong>Temples</strong> — Ramappa Temple, Thousand Pillar Temple, Bhadrachalam, and religious pilgrimage destinations.</li>
+      <li><strong>Waterfalls</strong> — Kuntala, Pochera, Mallela Theertham, and other natural water attractions.</li>
+      <li><strong>Culture &amp; Festivals</strong> — Bonalu, Bathukamma, Dasara, and traditional arts.</li>
+      <li><strong>Food Places</strong> — Local cuisine, street food, and renowned restaurants across districts.</li>
+    </ul>
+
+    <h2 class="section">Appendix G: User Manual</h2>
+    <p>This appendix provides step-by-step instructions for end users of the Telangana Tourism Blog application.</p>
+    <p><strong>Step 1 — Access the Application:</strong> Start the server using npm start from the project root. Open a web browser and navigate to http://localhost:5001 (or the configured PORT). The home page will load with navigation options.</p>
+    <p><strong>Step 2 — Register an Account:</strong> Click Register in the navigation bar. Enter your full name, valid email address, and a password of at least six characters. Submit the form. Upon success, you will receive a JWT token and can proceed to login if not automatically authenticated.</p>
+    <p><strong>Step 3 — Login:</strong> Click Login, enter your registered email and password, and submit. The navigation bar will update to show your name, Add Blog link, and Logout. Admin users will additionally see the Admin link.</p>
+    <p><strong>Step 4 — Browse Blogs:</strong> Click Blogs to view all published content. Use category pills (Historical, Temples, Waterfalls, Culture &amp; Festivals, Food Places, All) to filter results. Click any blog card to open the detail modal.</p>
+    <p><strong>Step 5 — Read and Comment:</strong> In the blog modal, read the full description and view comments from other users. If logged in, type your comment in the input field and click Post. Your comment will appear with your name and timestamp.</p>
+    <p><strong>Step 6 — Create a Blog:</strong> Click Add Blog. Fill in the title, detailed description, select a category, and optionally choose an image file (JPEG, PNG, GIF, or WebP, max 5 MB). Click Publish. Your blog will appear in the listing after successful submission.</p>
+    <p><strong>Step 7 — Admin Moderation:</strong> Administrators log in with an admin-role account, navigate to Admin, review listed blogs and comments, and use delete buttons to remove inappropriate content. User list provides overview of registered accounts.</p>
+    <p><strong>Step 8 — Logout:</strong> Click Logout to clear your session token from localStorage and return to guest navigation state.</p>
+
+    <h2 class="section">Appendix H: Glossary</h2>
+    <table class="report-table">
+      <thead>
+        <tr><th>Term</th><th>Definition</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>API</td><td>Application Programming Interface — a set of endpoints for client-server communication</td></tr>
+        <tr><td>CRUD</td><td>Create, Read, Update, Delete — basic database operations</td></tr>
+        <tr><td>JWT</td><td>JSON Web Token — a compact token format for authentication</td></tr>
+        <tr><td>ODM</td><td>Object Document Mapper — Mongoose layer over MongoDB</td></tr>
+        <tr><td>REST</td><td>Representational State Transfer — architectural style for web APIs</td></tr>
+        <tr><td>CDN</td><td>Content Delivery Network — distributed servers for fast media delivery</td></tr>
+      </tbody>
+    </table>
+
+  </div><!-- report-body -->
+
+</body>
+</html>

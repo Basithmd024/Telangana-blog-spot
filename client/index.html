@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Explore the beauty of Telangana through our tourism blog. Discover historical places, temples, waterfalls, culture, and food.">
-  <title>Telangana Tourism Blog - Explore the Heritage</title>
+  <title>Telangana Tourism Blog — Culture, Tradition & Heritage</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -30,7 +30,7 @@
             <a class="nav-link" href="#" onclick="logout()"><i class="bi bi-box-arrow-right me-1"></i>Logout</a>
           </li>
           <li class="nav-item" id="navUser" style="display:none;">
-            <span class="nav-link" style="color:var(--accent)!important;"><i class="bi bi-person-circle me-1"></i><span id="navUserName"></span></span>
+            <span class="nav-link" style="color:var(--gold-light)!important;"><i class="bi bi-person-circle me-1"></i><span id="navUserName"></span></span>
           </li>
         </ul>
       </div>
@@ -40,14 +40,15 @@
   <!-- Hero Section -->
   <section class="hero-section">
     <div class="hero-content">
+      <p class="hero-telugu">తెలంగాణ — సంస్కృతి, సంప్రదాయం, అందం</p>
       <div class="hero-badge">
-        <i class="bi bi-geo-alt-fill"></i> Discover Telangana's Hidden Gems
+        <i class="bi bi-geo-alt-fill"></i> Land of Bonalu, Bathukamma & Kakatiya Heritage
       </div>
       <h1 class="hero-title">
-        Explore the<br><span class="highlight">Heart of India</span>
+        Where Tradition<br><span class="highlight">Meets Timeless Beauty</span>
       </h1>
       <p class="hero-subtitle">
-        Journey through the rich heritage, majestic temples, stunning waterfalls, vibrant festivals, and delicious cuisine of Telangana.
+        Walk through Charminar's lanes, Pochampally weaves, thousand-pillar temples, misty waterfalls, Bonalu drums, and the warmth of Telangana's people.
       </p>
       <div class="hero-buttons">
         <a href="blogs.html" class="btn-primary-custom">
@@ -56,6 +57,11 @@
         <a href="register.html" class="btn-outline-custom">
           <i class="bi bi-pen me-2"></i>Start Writing
         </a>
+      </div>
+      <div class="hero-highlights" aria-label="Featured Telangana themes">
+        <span><i class="bi bi-building"></i> Charminar</span>
+        <span><i class="bi bi-water"></i> Ramappa</span>
+        <span><i class="bi bi-flower1"></i> Bathukamma</span>
       </div>
       <div class="hero-stats">
         <div class="hero-stat">
@@ -74,11 +80,42 @@
     </div>
   </section>
 
+  <!-- Culture & Tradition -->
+  <section class="culture-section">
+    <div class="container">
+      <h2 class="section-title">Telangana <span class="highlight">Culture & Tradition</span></h2>
+      <p class="section-subtitle">Festivals, crafts, and heritage that define our land</p>
+      <div class="ornament-divider"><i class="bi bi-diamond-fill"></i></div>
+      <div class="culture-grid">
+        <div class="culture-card fade-in-up">
+          <div class="culture-icon"><i class="bi bi-flower1"></i></div>
+          <h3>Bathukamma</h3>
+          <p>Floral festival of nine nights — women arrange vibrant flower stacks and celebrate nature's bounty.</p>
+        </div>
+        <div class="culture-card fade-in-up" style="animation-delay:0.1s;">
+          <div class="culture-icon"><i class="bi bi-music-note-beamed"></i></div>
+          <h3>Bonalu</h3>
+          <p>Maroon-clad devotees, rhythmic drums, and offerings to Goddess Mahankali across Hyderabad.</p>
+        </div>
+        <div class="culture-card fade-in-up" style="animation-delay:0.2s;">
+          <div class="culture-icon"><i class="bi bi-grid-3x3-gap"></i></div>
+          <h3>Pochampally Ikat</h3>
+          <p>UNESCO-recognized double ikat weave — geometric patterns in silk and cotton from Nalgonda.</p>
+        </div>
+        <div class="culture-card fade-in-up" style="animation-delay:0.3s;">
+          <div class="culture-icon"><i class="bi bi-building"></i></div>
+          <h3>Kakatiya Legacy</h3>
+          <p>Warangal fort, Ramappa temple, and stone gateways that echo a golden medieval era.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Featured Blogs Section -->
-  <section class="py-5" style="background: var(--dark);">
+  <section class="featured-section">
     <div class="container">
       <h2 class="section-title">Latest <span class="highlight">Blog Posts</span></h2>
-      <p class="section-subtitle">Fresh stories and travel guides from across Telangana</p>
+      <p class="section-subtitle">Stories from forts, temples, waterfalls & kitchens across Telangana</p>
       <div class="row g-4" id="homeBlogsContainer">
         <div class="spinner-wrapper">
           <div class="custom-spinner"></div>
@@ -92,9 +129,29 @@
 
   <!-- Footer -->
   <footer class="site-footer">
-    <div class="container">
-      <div class="footer-brand">Telangana<span style="color:var(--accent)">Blog</span></div>
-      <p>&copy; 2026 Telangana Tourism Blog. Built with <i class="bi bi-heart-fill" style="color:var(--primary);"></i> for Telangana.</p>
+    <div class="footer-panel container">
+      <div class="footer-brand">Telangana<span style="color:var(--terracotta-light)">Blog</span></div>
+      <p class="footer-quote">A living guide to Telangana's heritage, food, festivals, and places that deserve the spotlight.</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="blogs.html">Blogs</a>
+        <a href="register.html">Write a Story</a>
+        <a href="login.html">Login</a>
+      </div>
+      <div class="footer-social" aria-label="Social links">
+        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        <a href="#" aria-label="X"><i class="bi bi-twitter-x"></i></a>
+      </div>
+      <p class="footer-tagline">జై తెలంగాణ — Celebrating our roots</p>
+      <div class="footer-icons">
+        <span><i class="bi bi-flower1"></i> Bathukamma</span>
+        <span><i class="bi bi-music-note-beamed"></i> Bonalu</span>
+        <span><i class="bi bi-grid-3x3-gap"></i> Pochampally</span>
+        <span><i class="bi bi-cup-hot"></i> Telangana Cuisine</span>
+      </div>
+      <p>&copy; 2026 Telangana Tourism Blog. Built with <i class="bi bi-heart-fill" style="color:var(--gold);"></i> for Telangana.</p>
     </div>
   </footer>
 
@@ -111,9 +168,10 @@
 
     async function loadHomeBlogs() {
       try {
+        const container = document.getElementById('homeBlogsContainer');
+        container.innerHTML = createBlogSkeletonCards(3);
         const res = await fetch('/api/blogs');
         const blogs = await res.json();
-        const container = document.getElementById('homeBlogsContainer');
 
         // Update stats
         document.getElementById('statBlogs').textContent = blogs.length;

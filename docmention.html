@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Project Report — QR Code Generator (Template)</title>
+  <style>
+    /* Page setup for A4 printing */
+    @page {
+      size: A4 portrait;
+      margin: 1in 1in 1in 1.5in; /* top right bottom left */
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 12pt;
+      line-height: 1.5;
+      color: #000000;
+    }
+
+    /* Paragraph spacing */
+    p { margin: 0 0 6pt 0; text-align: justify; }
+
+    /* Chapter heading */
+    h1.chapter {
+      font-size: 16pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-top: 12pt;
+      margin-bottom: 6pt;
+      page-break-before: always;
+      text-align: center;
+      color: #003366; /* dark blue optional */
+    }
+
+    /* Main section heading */
+    h2.section {
+      font-size: 14pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-top: 12pt;
+      margin-bottom: 6pt;
+      text-align: left;
+      color: #003366;
+    }
+
+    /* Subheading */
+    h3.subsection {
+      font-size: 12pt;
+      font-weight: bold;
+      margin-top: 8pt;
+      margin-bottom: 6pt;
+      text-align: left;
+    }
+
+    /* Title page */
+    .title-page {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      page-break-after: always;
+      text-align: center;
+    }
+    .project-title { font-size: 22pt; font-weight: bold; margin-bottom: 18pt; }
+    .submitted-by { font-size: 14pt; font-weight: bold; margin-bottom: 12pt; }
+    .college-name { font-size: 16pt; font-weight: bold; margin-bottom: 8pt; }
+
+    /* Table of contents */
+    .toc-title { font-size: 16pt; font-weight: bold; text-align: center; margin-bottom: 12pt; }
+    .toc { font-size: 12pt; line-height: 1.5; }
+    .toc ul { list-style: none; padding-left: 0; }
+    .toc li { margin: 6px 0; }
+
+    /* Figure caption */
+    .figure { text-align: center; margin: 8pt 0; }
+    .figure caption { display: block; font-style: italic; font-size: 11pt; }
+
+    /* Table styling */
+    table.report-table { width: 100%; border-collapse: collapse; font-size: 11pt; margin: 8pt 0; }
+    table.report-table th, table.report-table td { border: 1px solid #000; padding: 6px; text-align: center; }
+    table.report-table th { font-weight: bold; }
+
+    /* Code blocks */
+    pre.code { font-family: Consolas, 'Courier New', monospace; font-size: 11pt; background: #f7f7f7; padding: 8px; overflow: auto; }
+
+    /* Footer / page number (best-effort) */
+    @media print {
+      footer { position: fixed; bottom: 0; left: 0; right: 0; text-align: center; font-size: 11pt; }
+      /* Attempt to show page number in print using CSS counter (not supported everywhere) */
+      body { counter-reset: pageNum; }
+      footer:after { content: counter(page); }
+    }
+
+    /* Screen readability */
+    .container { max-width: 800px; margin: 0 auto; padding: 12pt; }
+  </style>
+</head>
+<body>
+
+  <!-- Title Page -->
+  <section class="title-page">
+    <div class="project-title">QR CODE GENERATOR</div>
+    <div class="submitted-by">Submitted By: Your Name(s)</div>
+    <div class="college-name">Your College / Institution</div>
+    <div class="meta">Department of Computer Science & Engineering</div>
+    <div class="meta" style="margin-top:18pt;">Month Year</div>
+  </section>
+
+  <!-- Certificate / Declaration / Acknowledgement (optional pages) -->
+  <section class="container">
+    <h1 class="chapter" style="page-break-before: auto;">CERTIFICATE</h1>
+    <p>Certificate text goes here.</p>
+  </section>
+
+  <section class="container">
+    <h1 class="chapter">ACKNOWLEDGEMENT</h1>
+    <p>Acknowledgement text goes here.</p>
+  </section>
+
+  <!-- Table of Contents -->
+  <section class="container">
+    <div class="toc-title">TABLE OF CONTENTS</div>
+    <nav class="toc">
+      <ul>
+        <li>1. INTRODUCTION ........................................ 1</li>
+        <li>1.1 PROBLEM DEFINITION .......................... 2</li>
+        <li>2. LITERATURE SURVEY .............................. 3</li>
+        <li>3. METHODOLOGY ...................................... 4</li>
+        <li>4. RESULTS & DISCUSSION .......................... 5</li>
+        <li>5. CONCLUSION ....................................... 6</li>
+        <li>REFERENCES .......................................... 7</li>
+        <li>APPENDIX ............................................. 8</li>
+      </ul>
+    </nav>
+  </section>
+
+  <!-- Sample Chapters -->
+  <section class="container">
+    <h1 class="chapter">1. INTRODUCTION</h1>
+    <h2 class="section">1.1 PROBLEM DEFINITION</h2>
+    <p>Describe the problem definition here. Keep paragraphs justified with 1.5 line spacing and 6pt space after each paragraph.</p>
+
+    <h2 class="section">1.2 OBJECTIVES</h2>
+    <p>List the project objectives.</p>
+
+    <h1 class="chapter">2. LITERATURE SURVEY</h1>
+    <p>Summarize related work and references.</p>
+
+    <h1 class="chapter">3. METHODOLOGY</h1>
+    <p>Explain the tools and methods used (e.g., Node.js, Express, MongoDB).</p>
+
+    <h3 class="subsection">Node.js</h3>
+    <p>Short description of Node.js usage.</p>
+
+    <h1 class="chapter">4. RESULTS & DISCUSSION</h1>
+    <div class="figure">
+      <img src="client/add-blog.html" alt="Example screenshot" style="width:420px; max-width:80%; height:auto; display:block; margin:0 auto;" />
+      <caption>Figure 4.1: QR Code Generator Home Page</caption>
+    </div>
+
+    <h1 class="chapter">5. CONCLUSION</h1>
+    <p>Conclusion text.</p>
+
+    <h1 class="chapter">REFERENCES</h1>
+    <p>Reference list in appropriate citation style.</p>
+
+    <h1 class="chapter">APPENDIX</h1>
+    <p>Appendix content: code, extra tables, test cases.</p>
+
+    <h2 class="section">Sample Table</h2>
+    <table class="report-table">
+      <thead>
+        <tr>
+          <th>Test Case</th>
+          <th>Description</th>
+          <th>Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>TC-01</td>
+          <td>Generate QR for text input</td>
+          <td>Pass</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="section">Sample Code (Appendix)</h2>
+    <pre class="code">// Example Node.js snippet
+const express = require('express');
+const app = express();
+app.listen(3000, () =&gt; console.log('Server running'));
+    </pre>
+
+  </section>
+
+  <footer></footer>
+</body>
+</html>

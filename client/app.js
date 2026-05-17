@@ -60,29 +60,36 @@ function updateNav() {
 function createBlogCard(blog, index) {
   const imgSrc = blog.image
     ? blog.image
-    : `https://placehold.co/600x400/1c2333/e85d04?text=${encodeURIComponent(blog.category)}`;
+    : `https://placehold.co/600x400/2a1520/d4a84b?text=${encodeURIComponent(blog.category || 'Telangana Blog')}`;
 
   const authorName = blog.author?.name || 'Unknown';
+  const category = blog.category || 'Uncategorized';
+  const title = blog.title || 'Untitled Story';
+  const description = blog.description || 'No description available yet.';
   const date = new Date(blog.createdAt).toLocaleDateString('en-IN', {
     year: 'numeric',
     month: 'short',
     day: 'numeric'
   });
 
-  const truncatedDesc = blog.description.length > 120
-    ? blog.description.substring(0, 120) + '...'
-    : blog.description;
+  const truncatedDesc = description.length > 120
+    ? description.substring(0, 120) + '...'
+    : description;
 
   return `
     <div class="col-md-6 col-lg-4 fade-in-up" style="animation-delay: ${index * 0.1}s;">
-      <div class="blog-card" onclick="openBlogModal('${blog._id}')" style="cursor:pointer;">
+      <div class="blog-card" onclick="openBlogModal('${blog._id}')" style="cursor:pointer;" role="button" tabindex="0" onkeydown="if(event.key==='Enter'){openBlogModal('${blog._id}')}" aria-label="Open blog: ${title}">
         <div class="card-img-wrapper">
-          <img src="${imgSrc}" alt="${blog.title}" loading="lazy">
-          <span class="category-badge">${blog.category}</span>
+          <img src="${imgSrc}" alt="${title}" loading="lazy" decoding="async">
+          <span class="category-badge">${category}</span>
         </div>
         <div class="card-body">
-          <h5 class="card-title">${blog.title}</h5>
+          <div class="card-meta">${category}</div>
+          <h5 class="card-title">${title}</h5>
           <p class="card-text">${truncatedDesc}</p>
+          <div class="card-actions">
+            <span class="read-more">Read story</span>
+          </div>
         </div>
         <div class="card-footer">
           <span class="author"><i class="bi bi-person-fill me-1"></i>${authorName}</span>
@@ -117,16 +124,31 @@ function showToast(message, type = 'info') {
   }, 3000);
 }
 
+// ===== Skeleton Loading =====
+function createBlogSkeletonCards(count = 6) {
+  return `
+    <div class="skeleton-grid col-12">
+      ${Array.from({ length: count }).map(() => `
+        <div class="skeleton-card">
+          <div class="skeleton-image"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-pill"></div>
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line short"></div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
 // ===== Navbar Scroll Effect =====
-window.addEventListener('scroll', () => {
+function syncNavbarState() {
   const navbar = document.getElementById('mainNavbar');
-  if (navbar) {
-    if (window.scrollY > 50) {
-      navbar.style.background = 'rgba(13, 17, 23, 0.95)';
-      navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.3)';
-    } else {
-      navbar.style.background = 'rgba(13, 17, 23, 0.85)';
-      navbar.style.boxShadow = 'none';
-    }
-  }
-});
+  if (!navbar) return;
+  navbar.classList.toggle('scrolled', window.scrollY > 24);
+}
+
+window.addEventListener('scroll', syncNavbarState, { passive: true });
+window.addEventListener('DOMContentLoaded', syncNavbarState);
