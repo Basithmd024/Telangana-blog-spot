@@ -1,0 +1,14 @@
+{
+  "id": "session-1779253870382",
+  "startedAt": "2026-05-20T05:11:10.382Z",
+  "cwd": "/Users/basith/Telangana_Blog",
+  "context": {},
+  "metrics": {
+    "edits": 0,
+    "commands": 0,
+    "tasks": 0,
+    "errors": 0
+  },
+  "endedAt": "2026-05-20T05:11:10.675Z",
+  "duration": 294
+}

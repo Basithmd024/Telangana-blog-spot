@@ -8,7 +8,7 @@
     /* ===== Page Setup (A4 Portrait) ===== */
     @page {
       size: A4 portrait;
-      margin: 1in 1in 1in 1.5in; /* top, right, bottom, left */
+      margin: 0; /* Removes browser default headers/footers */
     }
 
     * {
@@ -292,6 +292,9 @@
     }
 
     @media print {
+      body {
+        margin: 1in 1in 1in 1.5in; /* Re-apply margins to physical pages */
+      }
       .print-bar { display: none; }
       body.has-bar { padding-top: 0; }
       .report-body { max-width: none; padding: 0; }
@@ -501,7 +504,34 @@
     </table>
 
     <div class="figure">
-      <div class="figure-placeholder">[Insert Use Case Diagram — Visitor, User, Admin with use cases]</div>
+      <div class="mermaid">
+        flowchart TD
+          V((Visitor))
+          U((User))
+          A((Admin))
+
+          subgraph System [Telangana Tourism Blog]
+            UC1(Register Account)
+            UC2(Login)
+            UC3(Browse Blogs)
+            UC4(View Blog Detail)
+            UC5(Create Blog)
+            UC6(Post Comment)
+            UC7(Manage Content)
+            UC8(Google Sign-In)
+          end
+
+          V --> UC1
+          V --> UC8
+          V --> UC3
+          V --> UC4
+          U --> UC2
+          U --> UC3
+          U --> UC4
+          U --> UC5
+          U --> UC6
+          A --> UC7
+      </div>
       <div class="figure-caption">Figure 1.1: Use Case Diagram for Telangana Tourism Blog</div>
     </div>
 
@@ -739,7 +769,31 @@
     </table>
 
     <div class="figure">
-      <div class="figure-placeholder">[Insert Architecture Diagram — Client → Express API → MongoDB / Cloudinary]</div>
+      <div class="mermaid">
+        flowchart TD
+          subgraph Client [Client Tier - Browser]
+              UI[HTML / CSS]
+              JS[Vanilla JS / Fetch API]
+              UI <--> JS
+          end
+
+          subgraph Server [Application Tier - Node.js]
+              API[Express REST API]
+              AUTH[JWT Auth Middleware]
+              CTRL[Controllers]
+              API --> AUTH
+              AUTH --> CTRL
+          end
+
+          subgraph Storage [Data Tier]
+              DB[(MongoDB)]
+              CDN[Cloudinary CDN]
+          end
+
+          JS <-->|HTTP Request/Response| API
+          CTRL <-->|Mongoose ODM| DB
+          CTRL -->|Image Upload| CDN
+      </div>
       <div class="figure-caption">Figure 3.1: System Architecture of Telangana Tourism Blog</div>
     </div>
 
@@ -831,28 +885,33 @@
     <p><strong>Authentication, Add Blog, and Admin:</strong> Login and register pages issue JWTs stored in localStorage. Add-blog submits multipart forms with images. Admin dashboard enables content moderation for authorized administrators.</p>
 
     <div class="figure">
-      <div class="figure-placeholder">[Screenshot: index.html — Home Page with Hero Section]<br>Open index.html in browser and capture screenshot here.</div>
+      <img src="figure-4-1.png" alt="Screenshot: index.html — Home Page with Hero Section">
       <div class="figure-caption">Figure 4.1: Telangana Tourism Blog Home Page</div>
+      <p class="figure-description" style="text-align: center; font-size: 11pt; margin-top: 4pt; font-style: italic; color: #555;">This screenshot illustrates the responsive landing page, featuring a cultural tagline, dynamic background elements, and prominently displayed call-to-action buttons for visitors.</p>
     </div>
 
     <div class="figure">
-      <div class="figure-placeholder">[Screenshot: blogs.html — Blog Listing with Category Filters]</div>
+      <img src="figure-4-2.png" alt="Screenshot: blogs.html — Blog Listing with Category Filters">
       <div class="figure-caption">Figure 4.2: Blog Listing Page with Category Filter</div>
+      <p class="figure-description" style="text-align: center; font-size: 11pt; margin-top: 4pt; font-style: italic; color: #555;">Here, the blog listing interface is shown, demonstrating the grid layout of tourism articles along with the interactive category filtering pills at the top.</p>
     </div>
 
     <div class="figure">
-      <div class="figure-placeholder">[Screenshot: login.html — User Login Page]</div>
+      <img src="figure-4-3.png" alt="Screenshot: login.html — User Login Page">
       <div class="figure-caption">Figure 4.3: User Login Page</div>
+      <p class="figure-description" style="text-align: center; font-size: 11pt; margin-top: 4pt; font-style: italic; color: #555;">This screen displays the user authentication form where registered users can securely log in to receive their JWT session token.</p>
     </div>
 
     <div class="figure">
-      <div class="figure-placeholder">[Screenshot: add-blog.html — Create Blog Form]</div>
+      <img src="figure-4-4.png" alt="Screenshot: add-blog.html — Create Blog Form">
       <div class="figure-caption">Figure 4.4: Add Blog Page with Image Upload</div>
+      <p class="figure-description" style="text-align: center; font-size: 11pt; margin-top: 4pt; font-style: italic; color: #555;">The blog creation form is presented above, showcasing the fields for the title, category, description, and the file upload input for attaching an image.</p>
     </div>
 
     <div class="figure">
-      <div class="figure-placeholder">[Screenshot: admin.html — Admin Dashboard]</div>
+      <img src="figure-4-5.png" alt="Screenshot: admin.html — Admin Dashboard">
       <div class="figure-caption">Figure 4.5: Admin Dashboard for Content Management</div>
+      <p class="figure-description" style="text-align: center; font-size: 11pt; margin-top: 4pt; font-style: italic; color: #555;">This dashboard provides authorized administrators with tabular views to monitor and manage user accounts, blog posts, and comments across the platform.</p>
     </div>
 
     <h3 class="subsection">Telangana Tourism Content Categories — Implementation Detail</h3>
@@ -1096,5 +1155,9 @@ const adminOnly = (req, res, next) => {
 
   </div><!-- report-body -->
 
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'default' });
+  </script>
 </body>
 </html>

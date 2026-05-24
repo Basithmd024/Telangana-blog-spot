@@ -1,5 +1,4 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '.env') });
@@ -37,17 +36,23 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'client', 'index.html'));
 });
 
-// Connect to MongoDB and start server
+// Connect to MySQL and start server
 const PORT = process.env.PORT || 5001;
+const seedDatabase = require('./utils/seedData');
+const initDb = require('./config/initDb');
 
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log('✅ MongoDB connected successfully');
+initDb()
+  .then(async () => {
+    console.log('✅ MySQL connected and initialized successfully');
+    
+    // Seed default blogs if database is empty
+    await seedDatabase();
+
     app.listen(PORT, () => {
       console.log(`🚀 Server running on http://localhost:${PORT}`);
     });
   })
   .catch((err) => {
-    console.error('❌ MongoDB connection error:', err.message);
+    console.error('❌ Database connection error:', err.message);
     process.exit(1);
   });

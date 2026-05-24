@@ -5,19 +5,28 @@ services:
     ports:
       - "5001:5001"
     environment:
-      - MONGO_URI=mongodb://mongo:27017/telangana_tourism
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=rootpassword
+      - MYSQL_DATABASE=telangana_tourism
+      - MYSQL_PORT=3306
       - JWT_SECRET=change_this_secret
       - PORT=5001
     depends_on:
-      - mongo
+      - mysql
     volumes:
       - ./uploads:/usr/src/app/server/uploads
 
-  mongo:
-    image: mongo:6
+  mysql:
+    image: mysql:8.0
     restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=telangana_tourism
+    ports:
+      - "3306:3306"
     volumes:
-      - mongo-data:/data/db
+      - mysql-data:/var/lib/mysql
 
 volumes:
-  mongo-data:
+  mysql-data:
